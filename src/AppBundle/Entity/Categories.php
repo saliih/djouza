@@ -36,6 +36,13 @@ class Categories
     private $slug;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="act", type="boolean")
@@ -308,5 +315,21 @@ class Categories
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 }

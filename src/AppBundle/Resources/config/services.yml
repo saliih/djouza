@@ -9,6 +9,10 @@ services:
         arguments: [~, AppBundle\Entity\Posts, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Post" ,label: 'Posts', icon:'<i class="fa fa-envelope"></i>' }
+        calls:
+            - [addChild, ['@admin.comments']]
+            - [ setTemplate, ['edit', 'AppBundle:AdminPost:edit.html.twig']]
+
     admin.comments:
         class: AppBundle\Admin\CommentsAdmin
         arguments: [~, AppBundle\Entity\Comments, ~]

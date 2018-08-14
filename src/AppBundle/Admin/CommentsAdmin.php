@@ -17,6 +17,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class CommentsAdmin extends Admin
 {
+
+    protected $parentAssociationMapping = 'post';
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -47,7 +49,14 @@ class CommentsAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('author')
+            ->add('email')
+            ->add('url')
+            ->add('ip')
             ->add('dcr')
-        ;
+            ->add('body')
+            ->add('act')
+            ->add('post')
+       ;
     }
 }

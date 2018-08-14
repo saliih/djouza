@@ -1,0 +1,23 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+<script type="text/javascript" src="{{asset('tinymce/tinymce.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/fancybox/jquery.fancybox.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/fancybox/jquery.fancybox.css') }}" media="screen" />
+
+<script type="text/javascript">
+
+    function htmlbt(id){
+        var html = '';
+        html +=' <span class="input-group-addon">';
+        html +=' <a class="iframe-btn" href="{{ asset('tinymce/plugins/filemanager/dialog.php') }}?type=2&amp;field_id='+id+'"><i class="icon-upload bigger-110"></i>image</a>';
+        html +='</span>';
+        return html;
+    }
+</script>
+    {% javascripts
+    '@AppBundle/Resources/public/admin/js/posts.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

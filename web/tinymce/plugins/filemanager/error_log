@@ -1,0 +1,4 @@
+[10-Jan-2014 07:50:12 UTC] PHP Fatal error:  Call to undefined function mb_internal_encoding() in /home/techsmar/public_html/public/tinymce/plugins/filemanager/config/config.php on line 3
+[10-Jan-2014 07:52:09 UTC] PHP Warning:  scandir(/medias/): failed to open dir: No such file or directory in /home/techsmar/public_html/public/tinymce/plugins/filemanager/dialog.php on line 330
+[10-Jan-2014 07:52:09 UTC] PHP Warning:  scandir(): (errno 2): No such file or directory in /home/techsmar/public_html/public/tinymce/plugins/filemanager/dialog.php on line 330
+[10-Jan-2014 07:52:09 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/techsmar/public_html/public/tinymce/plugins/filemanager/dialog.php on line 337

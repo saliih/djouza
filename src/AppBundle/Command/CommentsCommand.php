@@ -38,13 +38,16 @@ class CommentsCommand extends ContainerAwareCommand
         foreach ($rows as $key=>$row)
         {
             $post = $em->getRepository('AppBundle:Posts')->findOneBy(array('oldId'=>$row['comment_post_ID']));
+            if($post === null){
+                continue;
+            }
             $comment = $em->getRepository('AppBundle:Comments')->findOneBy(array('oldId'=>$row['comment_ID']));
             if($comment === null){
                 $comment = new Comments();
                 $comment->setOldId($row['comment_ID']);
             }
             $comment->setPost($post);
-            $comment->setBody($row['comment_content']);
+            $comment->setBody(strip_tags($row['comment_content']));
             $dtime = \DateTime::createFromFormat("Y-m-d G:i:s", $row['comment_date']);
             $comment->setDcr($dtime);
             $comment->setAuthor($row['comment_author']);
@@ -59,7 +62,7 @@ class CommentsCommand extends ContainerAwareCommand
                 }
             }
             $em->persist($comment);
-            if($key % 50 == 1){
+            if($key % 500 == 1){
                 $em->flush();
             }
             $progressBar->advance();

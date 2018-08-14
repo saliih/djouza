@@ -42,6 +42,7 @@ class CategoriesAdmin extends Admin
             ->add('slug')
             ->add('ord')
             ->add('parent')
+            ->add('description')
         ;
     }
 

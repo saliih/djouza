@@ -50,9 +50,9 @@ class Posts
     private $title;
 
     /**
-     * @var int
+     * @var boolean
      *
-     * @ORM\Column(name="status", type="integer", nullable=true)
+     * @ORM\Column(name="status", type="boolean", nullable=true)
      */
     private $status;
 
@@ -129,11 +129,15 @@ class Posts
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categories")
      * @ORM\JoinTable(name="post_categories",
      *      joinColumns={@ORM\JoinColumn(name="post_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="categories_id", referencedColumnName="id", unique=true)}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="categories_id", referencedColumnName="id", unique=false)}
      *      )
      */
     private $categories;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comments", mappedBy="post", cascade={"persist"})
+     */
+    private $comments;
     public function __toString()
     {
         return (string)$this->getTitle();
@@ -144,6 +148,7 @@ class Posts
      */
     public function __construct()
     {
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = 0;
         $this->commentStatus = true;
@@ -502,5 +507,49 @@ class Posts
     public function setImage($image)
     {
         $this->image = $image;
+    }
+
+    /**
+     * Get nofollow
+     *
+     * @return boolean
+     */
+    public function getNofollow()
+    {
+        return $this->nofollow;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comments $comment
+     *
+     * @return Posts
+     */
+    public function addComment(\AppBundle\Entity\Comments $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comments $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comments $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

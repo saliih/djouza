@@ -27,9 +27,14 @@ class CategoriesCommand extends ContainerAwareCommand
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
         $con = $em->getConnection();
-        $sql = "select djouza.wp_terms.* from djouza.wp_terms
+        $sql = "select wp_terms.term_id,
+wp_terms.`name`,
+wp_terms.slug,
+wp_terms.term_group,
+wp_term_taxonomy.description,
+wp_term_taxonomy.parent from djouza.wp_terms
 INNER JOIN djouza.wp_term_taxonomy on djouza.wp_term_taxonomy.term_id = djouza.wp_terms.term_id
-where djouza.wp_term_taxonomy.taxonomy = \"category\"";
+where djouza.wp_term_taxonomy.taxonomy = 'category'";
         $stmt = $con -> prepare($sql);
 		$stmt -> execute();
 		$rows = $stmt->fetchAll();
@@ -40,7 +45,12 @@ where djouza.wp_term_taxonomy.taxonomy = \"category\"";
                 $catagory = new Categories();
                 $catagory->setAct(true);
             }
+            if($row['parent']!= 0){
+                $catparent = $em->getRepository('AppBundle:Categories')->findOneBy(array('oldId'=>$row['parent']));
+                $catagory->setParent($catparent);
+            }
             $catagory->setName($row['name']);
+            $catagory->setDescription($row['description']);
             $catagory->setSlug($row['slug']);
             $catagory->setOldId($row['term_id']);
             $em->persist($catagory);
