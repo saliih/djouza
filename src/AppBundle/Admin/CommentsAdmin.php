@@ -17,18 +17,20 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class CommentsAdmin extends Admin
 {
-
     protected $parentAssociationMapping = 'post';
+
+    /**
+     * @param ListMapper $listMapper
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->add('email', 'string', array('label'=>"Avatar",'template'=>'@App/AdminComments/avatar.html.twig'))
             ->add('dcr')
             ->add('author')
             ->add('post')
             ->add('body')
             ->add('act', null, array('editable'=>true))
-
-
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -36,6 +38,10 @@ class CommentsAdmin extends Admin
                 )
             ));
     }
+
+    /**
+     * @param RouteCollection $collection
+     */
     protected function configureRoutes(RouteCollection $collection)
     {
         // to remove a single route

@@ -1,18 +1,18 @@
 services:
+    admin.posts:
+        class: AppBundle\Admin\PostsAdmin
+        arguments: [~, AppBundle\Entity\Posts, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Post" ,label: 'Recettes', icon:'<i class="fa fa-envelope"></i>' }
+        calls:
+            - [addChild, ['@admin.comments']]
+            - [ setTemplate, ['edit', 'AppBundle:AdminPost:edit.html.twig']]
+
     admin.category:
         class: AppBundle\Admin\CategoriesAdmin
         arguments: [~, AppBundle\Entity\Categories, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Post" ,label: 'Catégories', icon:'<i class="fa fa-envelope"></i>' }
-    admin.posts:
-        class: AppBundle\Admin\PostsAdmin
-        arguments: [~, AppBundle\Entity\Posts, ~]
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Post" ,label: 'Posts', icon:'<i class="fa fa-envelope"></i>' }
-        calls:
-            - [addChild, ['@admin.comments']]
-            - [ setTemplate, ['edit', 'AppBundle:AdminPost:edit.html.twig']]
-
     admin.comments:
         class: AppBundle\Admin\CommentsAdmin
         arguments: [~, AppBundle\Entity\Comments, ~]
