@@ -1,0 +1,145 @@
+<header class="header-wrapper clearfix">
+    <div class="header-top">
+        <div class="container">
+            <div class="mag-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="top-menu pull-left">
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+
+                        <div class="social-icons pull-right">
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i
+                                        class="fa fa-facebook fa-lg"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i
+                                        class="fa fa-twitter fa-lg"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google+"><i
+                                        class="fa fa-google-plus fa-lg"></i></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .header-top -->
+
+    <div class="header-mid">
+        <div class="container">
+            <div class="mag-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="header-mid-wrapper clearfix">
+                            <div class="mid-logo-wrapper">
+                                <a class="logo" href="{{ path('homepage') }}" title="Recettes économiques et recettes faciles de Djouza"
+                                   rel="home">
+                                    <img width="150" nopin="nopin" src="{{ asset('assets/images/logo.png') }}" alt="Recettes économiques et recettes faciles de Djouza" title="Recettes économiques et recettes faciles de Djouza">
+                                </a><!-- .logo -->
+                            </div>
+                            <div class="header-banner">
+                                <a href="#">
+                                    <img src="http://placehold.it/728x90" alt=""/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .header-mid -->
+
+    <div class="header" id="header">
+        <div class="container">
+            <div class="mag-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Mobile Menu Button -->
+                        <a class="navbar-toggle collapsed" id="nav-button" href="#mobile-nav">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a><!-- .navbar-toggle -->
+
+                        <!-- Main Nav Wrapper -->
+                        <nav class="navbar mega-menu">
+                            <a class="logo" href="{{ path('homepage') }}" title="Recettes économiques et recettes faciles de Djouza"
+                               rel="home">
+                                Cuisiner avec Djouza
+                            </a><!-- .logo -->
+
+                            <!-- Navigation Menu -->
+                            <div class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown menu-color1">
+                                        <a href="{{ path('homepage') }}" >Accueil</a>
+                                    </li><!-- .dropdown .menu-color1 -->
+
+
+{% for item in categories %}
+                                    <!-- Dropdown List Menu -->
+                                    <li class="dropdown menu-color1">
+                                        <a{% if item.children | length > 0 %} href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                           aria-expanded="false"{% else %} href="{{ path('categorypage',{'slug':item.slug}) }}" {% endif %}>{% if item.name == "Boisson - Cocktail - confitures - glaces" %}Confiture{% else %}{{ item }}{% endif %}</a>
+                                        {% if item.children | length > 0 %}
+                                        <ul class="dropdown-menu" role="menu">
+                                        {% for el in  item.children %}
+                                            <li{% if el.children | length > 0 %} class="dropdown-submenu"{% endif %}>
+                                                <a href="{{ path('categorypage',{'slug':el.slug}) }}">{{ el }}</a>
+                                                {% if el.children | length > 0 %}
+                                                <ul class="dropdown-menu">
+                                                    {% for el2 in  el.children %}
+                                                    <li><a href="{{ path('categorypage',{'slug':el2.slug}) }}">{{ el2 }}</a></li>
+                                                    {% endfor %}
+
+                                                </ul>
+                                                {% endif %}<!-- .dropdown-menu -->
+                                            </li><!-- .dropdown-submenu -->
+                                           {% endfor %}
+                                        </ul><!-- dropdown-menu -->
+                                        {%  endif %}
+                                    </li><!-- .dropdown .menu-color1 -->
+                                    <!-- End Dropdown List Menu -->
+{% endfor %}
+                                    <li class="dropdown menu-color1">
+                                        <a href="{{ path('contactpage') }}" >Contact</a>
+                                    </li><!-- .dropdown .menu-color1 -->
+
+                                </ul><!-- .nav .navbar-nav -->
+                            </div><!-- .navbar-collapse -->              <!-- End Navigation Menu -->
+
+                            <div class="header-right">
+                                <div class="social-icons">
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i
+                                                class="fa fa-facebook fa-lg"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i
+                                                class="fa fa-twitter fa-lg"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google+"><i
+                                                class="fa fa-google-plus fa-lg"></i></a>
+                                    <!-- Only for Fixed Sidebar Layout -->
+                                    <a href="#" class="fixed-button navbar-toggle" id="fixed-button">
+                                        <i></i>
+                                        <i></i>
+                                        <i></i>
+                                        <i></i>
+                                    </a><!-- .fixed-button -->
+                                </div><!-- .social-icons -->
+                            </div><!-- .header-right -->
+
+                        </nav><!-- .navbar -->
+
+                        {#<div id="sb-search" class="sb-search">
+                            <form>
+                                <input class="sb-search-input" placeholder="Enter your search text..." type="text"
+                                       value="" name="search" id="search">
+                                <input class="sb-search-submit" type="submit" value="">
+                                <span class="sb-icon-search fa fa-search" data-toggle="tooltip" data-placement="bottom"
+                                      title="Search"></span>
+                            </form>
+                        </div><!-- .sb-search -->      #}      </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .header -->
+
+</header><!-- .header-wrapper -->

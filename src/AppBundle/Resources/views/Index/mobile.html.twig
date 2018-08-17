@@ -1,0 +1,25 @@
+<nav id="mobile-nav">
+    <div>
+        <ul>
+            <li>
+                <a href="{{ path('homepage') }}">Accueil</a>
+
+            </li>
+            {% for item in categories %}
+            <li>
+                <a href="{% if item.children | length == 0 %}{{ path('categorypage',{'slug':item.slug}) }}{% else %}#{% endif %}">{{ item }}</a>
+                {% if item.children | length > 0 %}
+                <ul>
+                    {% for el in  item.children %}
+                    <li><a href="{{ path('categorypage',{'slug':el.slug}) }}">{{ el }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+
+{% endfor %}
+            <li><a href="{{ path('contactpage') }}">Contact</a></li>
+
+        </ul>
+    </div>
+</nav>

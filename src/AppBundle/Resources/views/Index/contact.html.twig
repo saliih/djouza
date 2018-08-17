@@ -1,0 +1,101 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    <div class="main-content mag-content clearfix">
+        <div class="row">
+            <div class="col-md-12">
+
+                <article class="post-wrapper">
+
+                    <div class="post-content clearfix">
+
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <form class="clearfix" action="#" method="post">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="name" id="name" value="" tabindex="1" class="form-control" placeholder="Name *">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="email" id="email" value="" tabindex="2" class="form-control" placeholder="Email *">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <textarea name="message" cols="50" rows="6" tabindex="4" class="form-control" placeholder="Your message *"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button name="submit" type="submit" id="submit-button" tabindex="5" value="Submit" class="btn btn-default">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <p>
+                                    <strong>Address:</strong><br/>
+                                    Don't be too proud of this technological terror you've constructed. The ability to destroy a planet is insignificant next to the power of the Force.<br/>
+                                    <strong>Phone:</strong> (999) 999-999-999<br/>
+                                    <strong>Fax:</strong> (999) 999-999-999<br/>
+                                    <strong>Email:</strong> contact@yoursite.com
+                                </p>
+                                <ul class="social-list clearfix">
+
+                                    <li class="social-facebook">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Facebook">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-twitter" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Twitter">
+                                        <a href="#">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-gplus">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Google+">
+                                            <i class="fa fa-google-plus"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-youtube">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Youtube">
+                                            <i class="fa fa-youtube"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-instagram">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Instagram">
+                                            <i class="fa fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-pinterest">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Pinterest">
+                                            <i class="fa fa-pinterest"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-rss">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="RSS">
+                                            <i class="fa fa-rss"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div><!-- .post-content -->
+
+                </article><!-- .post-wrapper -->
+
+            </div><!-- .col-md-12 -->
+
+        </div><!-- .row -->
+
+    </div><!-- .main-content -->
+
+    {% endblock %}

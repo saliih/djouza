@@ -23,6 +23,7 @@ class CategoriesAdmin extends Admin
             ->add('name')
             ->add('ord')
             ->add('act', null, array('editable'=>true))
+            ->add('menu', null, array('editable'=>true))
             ->add('parent', null, array())
 
             ->add('_action', 'actions', array(

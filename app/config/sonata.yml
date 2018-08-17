@@ -5,6 +5,9 @@ sonata_admin:
     title:                'Cuisinez Avec Djouza'
     #title_logo:           public/logo.png
 
+    templates:
+        # default global templates
+        layout:  ":sonata:standard_layout.html.twig"
 sonata_block:
     blocks:
         # enable the SonataAdminBundle block

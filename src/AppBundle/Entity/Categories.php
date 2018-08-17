@@ -49,6 +49,13 @@ class Categories
      */
     private $act;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="menu", type="boolean")
+     */
+    private $menu;
+
 
     /**
      * @var int
@@ -93,6 +100,7 @@ class Categories
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
         $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
         $this->act = false;
+        $this->menu = false;
     }
 
     /**
@@ -331,5 +339,21 @@ class Categories
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMenu()
+    {
+        return $this->menu;
+    }
+
+    /**
+     * @param bool $menu
+     */
+    public function setMenu($menu)
+    {
+        $this->menu = $menu;
     }
 }
