@@ -50,7 +50,7 @@ class ChannelAdmin extends Admin
 
         $data = ($this->CallAPI("GET",$url));
         echo "<pre>";
-        print_r((array)$data);exit;
+        print_r((array)$data[0]);exit;
     }
     private function CallAPI($method, $url, $data = false)
     {
