@@ -7,7 +7,7 @@ sonata_admin:
 
     templates:
         # default global templates
-        layout:  ":sonata:standard_layout.html.twig"
+        layout:  ":Sonata:standard_layout.html.twig"
 sonata_block:
     blocks:
         # enable the SonataAdminBundle block
