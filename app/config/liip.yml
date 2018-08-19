@@ -1,0 +1,17 @@
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        category_page_une:
+            quality: 100
+            filters:
+                upscale: { min: [730, 480] }
+                thumbnail: { size: [730, 480], mode: outbound , format: png  }
+        category_page_deux:
+            quality: 100
+            filters:
+                upscale: { min: [255, 180] }
+                thumbnail: { size: [255, 255], mode: outbound , format: png  }

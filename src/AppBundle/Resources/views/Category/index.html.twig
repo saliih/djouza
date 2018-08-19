@@ -1,3 +1,114 @@
 {% extends '::base.html.twig' %}
 {% block body %}
+    <div class="mag-content clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ad728-wrapper">
+                    <a href="#">
+                        <img src="http://placehold.it/728x90" alt=""/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Main Banner -->
+    <div class="main-content mag-content clearfix" data-stickyparent>
+
+
+        <div class="row blog-content">
+            <div class="col-md-8">
+                <h3 class="block-title"><span>{{ category.name }}</span></h3>
+                {% for key,item in posts %}
+                    {% if key == 0 or key == 5 %}
+                        {% if key == 5 %}
+                            <article class="news-block big-block">
+                                <div class="ad728-wrapper">
+                                    <a href="#">
+                                        <img src="http://placehold.it/728x90" alt=""/>
+                                    </a>
+                                </div>
+                            </article>
+                        {% endif %}
+                        <article class="news-block big-block">
+                        {% if item.image != "" %}
+                            <a href="#" class="overlay-link">
+                                <figure class="image-overlay">
+                                    <img src="{{ asset(item.image) | imagine_filter('category_page_une') }}" alt="{{ item.title }}"/>
+                                </figure>
+                            </a>
+                            {% endif %}
+                            <a href="#" class="category">
+                                {{ category.name }}
+                            </a>
+                            <header class="news-details">
+                                <h3 class="news-title">
+                                    <a href="#">
+                                        {{ item.title }}
+                                    </a>
+                                </h3>
+                                <p>{{ item.body | shortdesc }}</p>
+                                <p class="simple-share">
+                                    par <a href="#"><b>Djouza</b></a> -
+                                    <span class="article-date"><i
+                                                class="fa fa-calendar"></i> {{ item.dcr |date('d/m/Y') }}</span>
+                                </p>
+                            </header>
+                        </article>
+                    {% else %}
+
+                        <article class="simple-post simple-big clearfix">
+                            {% if item.image != "" %}
+                            <div class="simple-thumb">
+                                <a href="#">
+                                    <img src="{{ asset(item.image) | imagine_filter('category_page_deux') }}"
+                                         alt="{{ item.title }}"/>
+
+                                </a>
+                            </div>{% endif %}
+                            <header>
+                                <p class="simple-share">
+                                    <a href="#"> {{ category.name }}</a> /
+                                    par <a href="#">Djouza</a> -
+                                    <span><i class="fa fa-calendar"></i> {{ item.dcr |date('d/m/Y') }}</span>
+                                </p>
+
+                                <h3>
+                                    <a href="#">{{ category.name }}</a>
+                                </h3>
+
+                                <p class="excerpt">
+                                    {{ item.body | shortdesc }}
+                                </p>
+                            </header>
+                        </article>
+                    {% endif %}
+                {% endfor %}
+
+                <div class="load-more">
+
+                    {{ knp_pagination_render(posts) }}
+                </div>
+
+
+            </div><!-- End Left big column -->
+
+            {{ render(controller('AppBundle:Default:sidebar')) }}
+        </div><!-- .main-body -->
+
+
+    </div><!-- .main-content -->
+
+    <!-- End Main Banner -->
+    <div class="mag-content clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ad728-wrapper">
+                    <a href="#">
+                        <img src="http://placehold.it/728x90" alt=""/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

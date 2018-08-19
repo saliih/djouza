@@ -112,7 +112,7 @@ class PostsAdmin extends Admin
         $menu->addChild('Recette', array('uri' => $admin->generateUrl('edit', array('id' => $id))));
 
         //$menu->addChild('Import File', array('uri' => $admin->generateUrl('importfile')));
-        $menu->addChild('Comments'."($comment)", array('uri' => $admin->generateUrl('admin.comments.list', array('id' => $id))))
+        $menu->addChild('Commentaires '."($comment)", array('uri' => $admin->generateUrl('admin.comments.list', array('id' => $id))))
             ->setAttribute('icon', 'fa fa-comment')
             ->setLinkAttribute('class', 'tabulataion');
     }

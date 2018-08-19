@@ -17,4 +17,4 @@ services:
         class: AppBundle\Admin\CommentsAdmin
         arguments: [~, AppBundle\Entity\Comments, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Post" ,label: 'Comments', icon:'<i class="fa fa-envelope"></i>' }
+            - { name: sonata.admin, manager_type: orm, group: "Post" ,label: 'Commentaires', icon:'<i class="fa fa-envelope"></i>' }

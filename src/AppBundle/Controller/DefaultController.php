@@ -50,6 +50,13 @@ class DefaultController extends Controller
             "categories" => $categories
         ]);
     }
+    public function sidebarAction(Request $request)
+    {
+        $categories = $this->getAllCat();
+        return $this->render('AppBundle:Index:sidebar.html.twig', [
+            "categories" => $categories
+        ]);
+    }
     private function getAllCat(){
         return  $this->getDoctrine()->getRepository('AppBundle:Categories')->findBy(array('parent' => null, 'menu'=>true), array('ord' => "ASC"));
     }

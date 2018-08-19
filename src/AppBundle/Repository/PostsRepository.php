@@ -10,4 +10,19 @@ namespace AppBundle\Repository;
  */
 class PostsRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getPostsByCategories($category){
+        $query = $this->createQueryBuilder('a')
+            ->select('a')
+            ->leftJoin('a.categories', 'c')
+            ->addSelect('c')
+        ->orderBy('a.dcr','DESC');
+
+        $query = $query->add('where', $query->expr()->in('c', ':c'))
+            ->setParameter('c', $category)
+            ->getQuery()
+            ->getResult();
+
+        return $query;
+
+    }
 }
