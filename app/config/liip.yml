@@ -4,7 +4,10 @@ liip_imagine:
           web_path:
               web_root: "%kernel.root_dir%/../web"
               cache_prefix: "media/cache"
-
+    loaders:
+        default:
+            filesystem:
+                data_root: "%kernel.root_dir%/../web"
     filter_sets:
         cache: ~
         category_page_une:
