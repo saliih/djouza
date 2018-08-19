@@ -18,3 +18,17 @@ services:
         arguments: [~, AppBundle\Entity\Comments, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Post" ,label: 'Commentaires', icon:'<i class="fa fa-envelope"></i>' }
+
+    admin.videos:
+        class: AppBundle\Admin\VideosAdmin
+        arguments: [~, AppBundle\Entity\Videos, ~] #MailingBundle:CRUD
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "WebTv" ,label: 'Videos Youtube'}
+        #calls:
+        #    - [ setTemplate, [edit, AppBundle:Videos:edit.html.twig]]
+
+    admin.channel:
+        class: AppBundle\Admin\ChannelAdmin
+        arguments: [~, AppBundle\Entity\Channel, ~] #MailingBundle:CRUD
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "WebTv" ,label: 'Channel Youtube'}
