@@ -49,11 +49,12 @@ class ChannelAdmin extends Admin
         $url = 'https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId='.$channelID.'&maxResults='.$maxResults.'&key='.$API_key.'';
 
         $data = ($this->CallAPI("GET",$url));
-        foreach ($data as $item) {
+        //foreach ($data as $item) {
             echo "<pre>";
             print_r($data);
             echo "</pre>";
-        }exit;
+        //}
+        exit;
     }
     private function CallAPI($method, $url, $data = false)
     {
