@@ -43,12 +43,12 @@ class ChannelAdmin extends Admin
     }
     public function prePersist($object)
     {
-        $maxResults = 100;
+        $maxResults = 49;
         $channelID = $object->getChannelId();
         $API_key = "AIzaSyBGseWi-G-NxC1wO0R4UtTEg0HmSPXSJlI";
         $url = 'https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId='.$channelID.'&maxResults='.$maxResults.'&key='.$API_key.'';
-       
-        $data = $this->CallAPI("GET",$url);
+
+        $data = json_encode($this->CallAPI("GET",$url));
         echo "<pre>";
         print_r($data);exit;
     }
