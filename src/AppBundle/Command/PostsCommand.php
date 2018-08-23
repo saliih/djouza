@@ -55,12 +55,8 @@ class PostsCommand extends ContainerAwareCommand
             $post->setStatus(true);
             $post->setCommentStatus(( $row['comment_status'] == "open" ) ? true : false);
             $post->setBody($this->updatebody($row['post_content']));
-            $slug = $row['pinged'];
-            $slug = str_replace('http://cuisinezavecdjouza.fr/', '', $slug);
-            $slug = str_replace('https://cuisinezavecdjouza.fr/', '', $slug);
-            $slug = str_replace('http://www.cuisinezavecdjouza.fr/', '', $slug);
-            $slug = str_replace('https://www.cuisinezavecdjouza.fr/', '', $slug);
-            $post->setSlug($slug);
+
+            $post->setSlug($this->checkRedirection($row['post_name']));
             // image
             $postimage = "select guid from djouza.wp_posts where post_type='attachment' and post_parent = ".$row['ID']."  ORDER BY post_date desc limit 1";
             $stmtimg = $con->prepare($postimage);
@@ -152,9 +148,45 @@ WHERE tt.taxonomy IN ('category') AND tr.object_id = (".$row['ID'].");";
          $em->flush();
         $progressBar->finish();
     }
+    private function checkRedirection($slug){
+        /**/
+        $container = $this->getContainer();
+        $em = $container->get('doctrine')->getManager();
+        $con = $em->getConnection();
+        $sql = "select * from djouza.wp_redirection_items where url like '%$slug%' and status = 'enabled'  order by id desc limit 1";
+        $stmtoptions = $con->prepare($sql);
+        $stmtoptions->execute();
+        $redirect = $stmtoptions->fetch();
+        if (count($redirect)) {
+            if ($redirect['action_code'] == "301") {
+                $data = explode(" ", $redirect['url']);
+                 $countRedirect = count($data);
+                if($countRedirect == 1){
+                    $slug = $redirect['action_data'];
+                    $slug = str_replace("/","",$slug);
 
+                }elseif ($countRedirect == 4){
+                    $slug = $data[2];
+                }
+            }
+        }
+        $slug = $this->updateUrls($slug);
+        return $slug;
+    }
     private function updatebody($str){
-        $formated =  str_replace("wp-content/",'',$str);
+        $formated =  str_replace("wp-content",'',$str);
+        $formated = $this->updateUrls($formated);
         return $formated;
+    }
+    private function updateUrls($str){
+        $str = str_replace('http://cuisinezavecdjouza.fr/', '', $str);
+        $str = str_replace('https://cuisinezavecdjouza.fr/', '', $str);
+        $str = str_replace('http://www.cuisinezavecdjouza.fr/', '', $str);
+        $str = str_replace('https://www.cuisinezavecdjouza.fr/', '', $str);
+        $str = str_replace('http://cuisinezavecdjouza.fr', '', $str);
+        $str = str_replace('https://cuisinezavecdjouza.fr', '', $str);
+        $str = str_replace('http://www.cuisinezavecdjouza.fr', '', $str);
+        $str = str_replace('https://www.cuisinezavecdjouza.fr', '', $str);
+        return $str;
     }
 }

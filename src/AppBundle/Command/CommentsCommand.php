@@ -54,7 +54,7 @@ class CommentsCommand extends ContainerAwareCommand
             $comment->setEmail($row['comment_author_email']);
             $comment->setUrl($row['comment_author_url']);
             $comment->setIp($row['comment_author_IP']);
-            $comment->setAct(($row['comment_approved'])?true:false);
+            $comment->setAct(($row['comment_approved'] == 1 )?true:false);
             if($row['comment_parent'] != 0) {
                 $parent = $container->get('doctrine')->getRepository('AppBundle:Comments')->findOneBy(array('oldId' => $row['comment_parent']));
                 if($parent) {
