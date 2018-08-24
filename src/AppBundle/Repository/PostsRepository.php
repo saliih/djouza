@@ -10,17 +10,21 @@ namespace AppBundle\Repository;
  */
 class PostsRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getPostsByCategories($category){
+    public function getPostsByCategories($category, $limit = false)
+    {
         $query = $this->createQueryBuilder('a')
             ->select('a')
             ->leftJoin('a.categories', 'c')
-            ->addSelect('c')
-        ->orderBy('a.dcr','DESC');
+            ->addSelect('c');
+
 
         $query = $query->add('where', $query->expr()->in('c', ':c'))
-            ->setParameter('c', $category)
-            ->getQuery()
-            ->getResult();
+            ->setParameter('c', $category);
+        if ($limit) {
+            $query->setMaxResults($limit);
+        }
+        $query->orderBy('a.dcr', 'DESC');
+        return $query->getQuery()->getResult();
 
         return $query;
 

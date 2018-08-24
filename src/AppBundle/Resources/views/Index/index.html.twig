@@ -15,130 +15,150 @@
     <!-- End Main Banner -->
     <div class="main-content mag-content clearfix">
 
-        <div class="row">
-            <div class="col-sm-12">
-                <ul class="tag-list clearfix">
-                    <li class="trending">#Trending</li>
-                    <li><a href="page_tags.html">Windows 10</a></li>
-                    <li><a href="page_tags.html">FIFA 2015</a></li>
-                    <li><a href="page_tags.html">iPhone 6</a></li>
-                    <li><a href="page_tags.html">Flappy Bird</a></li>
-                    <li><a href="page_tags.html">World Cup</a></li>
-                    <li><a href="page_tags.html">WeChat desktop</a></li>
-                    <li><a href="page_tags.html">Clash of Clans</a></li>
-                    <li><a href="page_tags.html">Apple Watch</a></li>
-                    <li><a href="page_tags.html">CES 2015</a></li>
-                    <li><a href="page_tags.html">Lego</a></li>
-                </ul>
-            </div>
-        </div>
         <div class="row featured-wrapper">
             <div class="col-md-12">
-                <div class="flexslider">
+               <div class="flexslider">
                     <div class="featured-slider">
-
+                {% for item in sidePosts %}
+                        {% if loop.index == 1 or  loop.index == 6 %}
                         <div class="slider-item">
-                            <div class="row">
-                                <div class="col-md-8 omega">
-                                    <div class="featured-big">
-                                        <a href="#" class="featured-href">
-                                            <img src="http://placehold.it/870x500" alt=""/>
-                                            <div class="featured-header">
-                                                <span class="category bgcolor2">Gadget</span>
-                                                <h2>Smartwatch App Concepts You Need to See</h2>
-                                                <p class="simple-share">
-                                                    by John Doe -
-                                                    <span class="article-date">4 hours ago</span>
-                                                </p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
+                            {% endif %}
+                            {% if loop.index == 1  or loop.index == 3 or  loop.index == 6  or loop.index == 8 %}
+                            <div class="row paddingbottom30">
+                                {% endif %}
 
-                                <div class="col-md-4 alpha">
-                                    <div class="featured-small featured-top">
-                                        <a href="#" class="featured-href">
-                                            <img src="http://placehold.it/435x250" alt=""/>
-                                            <div class="featured-header">
-                                                <span class="category bgcolor5">PHOTO</span>
-                                                <h2>An Interview with Photographer John Doe</h2>
+                                {% if loop.index == 1 or  loop.index == 6  %}
+                                    <div class="col-md-8">
+                                        <article class="featured-small box-news box-big">
+                                            <a href="{{ path('article',{slug:item.slug}) }}">
+                                                <img alt="{{ item.title }}" src="{{ asset(item.image) | imagine_filter('730x320') }}" />
+                                            </a>
+                                            <header class="featured-header">
+                                                <a class="category bgcolor2" href="#">{{ item.categories[0] }}</a>
+                                                <h2><a href="{{ path('article',{slug:item.slug}) }}">{{ item.title }}</a></h2>
                                                 <p class="simple-share">
-                                                    by John Doe -
-                                                    <span class="article-date">4 hours ago</span>
+                                                    par <a href="#"><b>Djouza</b></a> -
+                                                    <span class="article-date">{{ item.dcr | date('d/m/Y') }}</span>
                                                 </p>
-                                            </div>
-                                        </a>
+                                            </header>
+                                        </article>
                                     </div>
-                                    <div class="featured-small">
-                                        <a href="#" class="featured-href">
-                                            <img src="http://placehold.it/435x250" alt=""/>
-                                            <div class="featured-header">
-                                                <span class="category bgcolor4">Business</span>
-                                                <h2>9 Business Leaders Share the Best and Worst Advice</h2>
+                                {% else %}
+                                    <div class="col-md-4">
+                                        <article class="featured-small box-news">
+                                            <a href="{{ path('article',{slug:item.slug}) }}">
+                                                <img alt="{{ item.title }}" src="{{ asset(item.image) | imagine_filter('350x350') }}"/>
+                                            </a>
+                                            <header class="featured-header">
+                                                <a class="category bgcolor2" href="#">{{ item.categories[0] }}</a>
+                                                <h2><a href="{{ path('article',{slug:item.slug}) }}">{{ item.title }}</a></h2>
                                                 <p class="simple-share">
-                                                    by John Doe -
-                                                    <span class="article-date">4 hours ago</span>
-                                                </p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div><!-- .row -->
-                        </div><!-- .slider-item -->
+                                                    Par <a href="#"><b>Djouza</b></a> -
+                                                    <span class="article-date">{{ item.dcr | date('d/m/Y') }}</span>
 
-                        <div class="slider-item">
-                            <div class="row">
-                                <div class="col-md-8 omega">
-                                    <div class="featured-big">
-                                        <a href="#" class="featured-href">
-                                            <img src="http://placehold.it/870x500" alt=""/>
-                                            <div class="featured-header">
-                                                <span class="category bgcolor2">Gadget</span>
-                                                <h2>Audio Equalizer Apps Beyond the Smartphone Sound</h2>
-                                                <p class="simple-share">
-                                                    by John Doe -
-                                                    <span class="article-date">25 minutes ago</span>
                                                 </p>
-                                            </div>
-                                        </a>
+                                            </header>
+                                        </article>
                                     </div>
-                                </div>
+                                {% endif %}
 
-                                <div class="col-md-4 alpha">
-                                    <div class="featured-small featured-top">
-                                        <a href="#" class="featured-href">
-                                            <img src="http://placehold.it/435x250" alt=""/>
-                                            <div class="featured-header">
-                                                <span class="category bgcolor3">Food</span>
-                                                <h2>How to Make Japanese-style sushi?</h2>
-                                                <p class="simple-share">
-                                                    by John Doe -
-                                                    <span class="article-date">4 hours ago</span>
-                                                </p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="featured-small">
-                                        <a href="#" class="featured-href">
-                                            <img src="http://placehold.it/435x250" alt=""/>
-                                            <div class="featured-header">
-                                                <span class="category bgcolor5">Photo</span>
-                                                <h2>The 20 most important Instagram pictures</h2>
-                                                <p class="simple-share">
-                                                    by John Doe -
-                                                    <span class="article-date">4 hours ago</span>
-                                                </p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div><!-- .row -->
-                        </div><!-- .slider-item -->
+                                {% if loop.index == 2 or loop.index == 5 or  loop.index == 7 or loop.index == 10  %}
+                            </div>
+                            {% endif %}
+                            {% if loop.index == 5 or  loop.index == 10 %}
+                       </div>
+                        {% endif %}
+                        {% endfor %}<!-- .row -->
 
-                    </div><!-- .featured-slider -->
-                </div><!-- .flexslider -->
-            </div>
+
+                  </div><!-- .featured-slider -->
+                </div>
+                    </div>
         </div><!-- .featured-wrapper -->
+        <div class="row blog-content">
+
+            <div class="col-md-6">
+
+                <h3 class="block-title top-title"><span>{{ tabCatOriental[0] }}</span></h3>
+
+                {% for item in orientalCat %}
+                <article class="news-block">
+                    <a href="{{ path('article',{slug:item.slug}) }}" class="overlay-link">
+                        <figure class="image-overlay">
+                            <img src="{{ asset(item.image) | imagine_filter('540x355') }}" alt="{{ item.title }}"/>
+                        </figure>
+                    </a>
+                    <a href="#" class="category">
+                        {{ item.categories[0] }}
+                    </a>
+                    <header class="news-details">
+                        <h3 class="news-title">
+                            <a href="{{ path('article',{slug:item.slug}) }}">
+                                {{ item.title }}
+                            </a>
+                        </h3>
+                        <p>{{ item.body | shortdesc(170) }}</p>
+                        <p class="simple-share">
+                            par <a href="#"><b>Djouza</b></a> -
+                            <span class="article-date"><i class="fa fa-calendar"></i> {{ item.dcr |date('d/m/Y') }}</span>
+                        </p>
+                    </header>
+                </article><!-- News block -->
+                {% endfor %}
+
+            </div><!-- big-block -->
+
+            <div class="col-md-4">
+
+                <h3 class="top-title block-title"><span>{{ tabCatRSucree[0] }}</span></h3>
+{% for item in rSucreeCat %}
+                <article class="news-block small-block">
+                    <a href="{# path('article',{slug:item.slug}) #}" class="overlay-link">
+                        <figure class="image-overlay">
+
+                            <img src="{{ asset(item.image) | imagine_filter('350x230') }}" alt="{{ item.title }}"/>
+                        </figure>
+                    </a>
+                    <a href="#" class="category">
+                        {{ item.categories[0] }}
+                    </a>
+                    <header class="news-details">
+                        <h3 class="news-title">
+                            <a href="{# path('article',{slug:item.slug}) #}">
+                                {{ item.title }}
+                            </a>
+                        </h3>
+                        <p class="simple-share">
+                            par <a href="#"><b>Djouza</b></a> -
+                            <span class="article-date"><i class="fa fa-calendar"></i> {{ item.dcr |date('d/m/Y') }}</span>
+                        </p>
+                    </header>
+                </article><!-- News block -->
+{% endfor %}
+
+            </div><!-- .col-md-6 -->
+
+            <div class="col-md-2">
+                <h3 class="top-title block-title"><span>{{ tabBoulange[0] }}</span></h3>
+                {% for item in boulangeCat %}
+                <article class="small-article">
+                    <figure class="feed-image">
+                        <a href="{# path('article',{slug:item.slug}) #}"><img src="{{ asset(item.image) | imagine_filter('160x105') }}" alt=""/></a>
+                    </figure>
+                    <h3>
+                        <a href="{# path('article',{slug:item.slug}) #}"> {{ item.title }}</a>
+                    </h3>
+                    <p><span>{{ item.dcr |date('d/m/Y') }}</span></p>
+                </article>
+
+{% endfor %}
+
+            </div><!-- .col-md-2 -->
+
+        </div>
+
+
+
         <div class="row main-body" data-stickyparent>
             <div class="col-md-8">
                 <section class="admag-block">
@@ -152,7 +172,7 @@
                                             <h3>
                                                 <a href="#">What the Viny "Comeback" Really Looks Like</a>
                                             </h3>
-                                            <p><span><i class="fa fa-clock-o"></i> 2 minutes ago</span></p>
+                                            <p><span><i class="fa fa-calendar"></i> 2 minutes ago</span></p>
                                         </article>
                                     </li>
 
@@ -161,7 +181,7 @@
                                             <h3>
                                                 <a href="#">Does going to the gym count as a sport?</a>
                                             </h3>
-                                            <p><span><i class="fa fa-clock-o"></i> 2 minutes ago</span></p>
+                                            <p><span><i class="fa fa-calendar"></i> 2 minutes ago</span></p>
                                         </article>
                                     </li>
 
@@ -170,7 +190,7 @@
                                             <h3>
                                                 <a href="#">Older actors still hot in Hollywood</a>
                                             </h3>
-                                            <p><span><i class="fa fa-clock-o"></i> 3 minutes ago</span></p>
+                                            <p><span><i class="fa fa-calendar"></i> 3 minutes ago</span></p>
                                         </article>
                                     </li>
 
@@ -179,7 +199,7 @@
                                             <h3>
                                                 <a href="#">5 Gadget Gifts for Father's Day</a>
                                             </h3>
-                                            <p><span><i class="fa fa-clock-o"></i> 3 minutes ago</span></p>
+                                            <p><span><i class="fa fa-calendar"></i> 3 minutes ago</span></p>
                                         </article>
                                     </li>
 
@@ -188,7 +208,7 @@
                                             <h3>
                                                 <a href="#">Inside U2's Ambitious Upcoming Tour Strategy</a>
                                             </h3>
-                                            <p><span><i class="fa fa-clock-o"></i> 5 minutes ago</span></p>
+                                            <p><span><i class="fa fa-calendar"></i> 5 minutes ago</span></p>
                                         </article>
                                     </li>
 
@@ -197,7 +217,7 @@
                                             <h3>
                                                 <a href="#">Mariah Carey is a spontaneous car singing hero</a>
                                             </h3>
-                                            <p><span><i class="fa fa-clock-o"></i> 10 minutes ago</span></p>
+                                            <p><span><i class="fa fa-calendar"></i> 10 minutes ago</span></p>
                                         </article>
                                     </li>
 
@@ -206,7 +226,7 @@
                                             <h3>
                                                 <a href="#">World Grand Prix schedule & scores</a>
                                             </h3>
-                                            <p><span><i class="fa fa-clock-o"></i> 15 minutes ago</span></p>
+                                            <p><span><i class="fa fa-calendar"></i> 15 minutes ago</span></p>
                                         </article>
                                     </li>
 
@@ -215,7 +235,7 @@
                                             <h3>
                                                 <a href="#">The 20 most important Instagram pictures of all time</a>
                                             </h3>
-                                            <p><span><i class="fa fa-clock-o"></i> 20 minutes ago</span></p>
+                                            <p><span><i class="fa fa-calendar"></i> 20 minutes ago</span></p>
                                         </article>
                                     </li>
 
@@ -224,7 +244,7 @@
                                             <h3>
                                                 <a href="#">How Technology Is Revolutionizing the Franchise World</a>
                                             </h3>
-                                            <p><span><i class="fa fa-clock-o"></i> 23 minutes ago</span></p>
+                                            <p><span><i class="fa fa-calendar"></i> 23 minutes ago</span></p>
                                         </article>
                                     </li>
 
@@ -233,7 +253,7 @@
                                             <h3>
                                                 <a href="#">Who was man of the match and who disappeared?</a>
                                             </h3>
-                                            <p><span><i class="fa fa-clock-o"></i> 35 minutes ago</span></p>
+                                            <p><span><i class="fa fa-calendar"></i> 35 minutes ago</span></p>
                                         </article>
                                     </li>
 
@@ -242,7 +262,7 @@
                                             <h3>
                                                 <a href="#">How Bollywood is romancing with period films to woo modern audience</a>
                                             </h3>
-                                            <p><span><i class="fa fa-clock-o"></i> 42 minutes ago</span></p>
+                                            <p><span><i class="fa fa-calendar"></i> 42 minutes ago</span></p>
                                         </article>
                                     </li>
 
@@ -251,7 +271,7 @@
                                             <h3>
                                                 <a href="#">6 Tips Before Traveling Internationally</a>
                                             </h3>
-                                            <p><span><i class="fa fa-clock-o"></i> 46 minutes ago</span></p>
+                                            <p><span><i class="fa fa-calendar"></i> 46 minutes ago</span></p>
                                         </article>
                                     </li>
                                 </ul>
@@ -278,7 +298,7 @@
                                     <p>I can't get involved! I've got work to do! It's not that I like the Empire, I hate it, but there's nothing I can do about it right now. It's such a long way from here.</p>
                                     <p class="simple-share">
                                         by <a href="#"><b>John Doe</b></a> -
-                                        <span class="article-date"><i class="fa fa-clock-o"></i> 3 minutes ago</span>
+                                        <span class="article-date"><i class="fa fa-calendar"></i> 3 minutes ago</span>
                                     </p>
                                 </div>
                             </article>
@@ -296,7 +316,7 @@
                                     <p class="simple-share">
                                         <a href="#">Gadget</a> /
                                         by <a href="#">John Doe</a> -
-                                        <span><i class="fa fa-clock-o"></i> 25 minutes ago</span>
+                                        <span><i class="fa fa-calendar"></i> 25 minutes ago</span>
                                     </p>
                                 </header>
                             </article>
@@ -314,7 +334,7 @@
                                     <p class="simple-share">
                                         <a href="#">Gadget</a> /
                                         by <a href="#">John Doe</a> -
-                                        <span><i class="fa fa-clock-o"></i> 1 hour ago</span>
+                                        <span><i class="fa fa-calendar"></i> 1 hour ago</span>
                                     </p>
                                 </header>
                             </article>
@@ -332,7 +352,7 @@
                                     <p class="simple-share">
                                         <a href="#">Gadget</a> /
                                         by <a href="#">John Doe</a> -
-                                        <span><i class="fa fa-clock-o"></i> 3 hours ago</span>
+                                        <span><i class="fa fa-calendar"></i> 3 hours ago</span>
                                     </p>
                                 </header>
                             </article>
@@ -350,7 +370,7 @@
                                     <p class="simple-share">
                                         <a href="#">Gadget</a> /
                                         by <a href="#">John Doe</a> -
-                                        <span><i class="fa fa-clock-o"></i> 6 hours ago</span>
+                                        <span><i class="fa fa-calendar"></i> 6 hours ago</span>
                                     </p>
                                 </header>
                             </article>
@@ -384,7 +404,7 @@
                                     <p>I can't get involved! I've got work to do! It's not that I like the Empire, I hate it, but there's nothing I can do about it right now. It's such a long way from here. Hokey religions and ancient weapons are no match for a good blaster at your side, kid. I'm surprised you had the courage to take the responsibility yourself.</p>
                                     <p class="simple-share">
                                         by <a href="#"><b>John Doe</b></a> -
-                                        <span class="article-date"><i class="fa fa-clock-o"></i> 3 minutes ago</span>
+                                        <span class="article-date"><i class="fa fa-calendar"></i> 3 minutes ago</span>
                                     </p>
                                 </header>
                             </article><!-- News block -->
@@ -410,7 +430,7 @@
                                     </h3>
                                     <p class="simple-share">
                                         by <a href="#"><b>John Doe</b></a> -
-                                        <span class="article-date"><i class="fa fa-clock-o"></i> 46 minutes ago</span>
+                                        <span class="article-date"><i class="fa fa-calendar"></i> 46 minutes ago</span>
                                     </p>
                                 </header>
                             </article><!-- News block -->
@@ -434,7 +454,7 @@
                                     </h3>
                                     <p class="simple-share">
                                         by <a href="#"><b>John Doe</b></a> -
-                                        <span class="article-date"><i class="fa fa-clock-o"></i> 2 hours ago</span>
+                                        <span class="article-date"><i class="fa fa-calendar"></i> 2 hours ago</span>
                                     </p>
                                 </div>
                             </article><!-- News block -->
@@ -460,7 +480,7 @@
                                     </h3>
                                     <p class="simple-share">
                                         by <a href="#"><b>John Doe</b></a> -
-                                        <span class="article-date"><i class="fa fa-clock-o"></i> 4 hours ago</span>
+                                        <span class="article-date"><i class="fa fa-calendar"></i> 4 hours ago</span>
                                     </p>
                                 </header>
                             </article><!-- News block -->
@@ -485,7 +505,7 @@
                                     </h3>
                                     <p class="simple-share">
                                         by <a href="#"><b>John Doe</b></a> -
-                                        <span class="article-date"><i class="fa fa-clock-o"></i> 6 hours ago</span>
+                                        <span class="article-date"><i class="fa fa-calendar"></i> 6 hours ago</span>
                                     </p>
                                 </header>
                             </article><!-- News block -->
@@ -512,7 +532,7 @@
                                     </h3>
                                     <p class="simple-share">
                                         by <a href="#"><b>John Doe</b></a> -
-                                        <span class="article-date"><i class="fa fa-clock-o"></i> 4 hours ago</span>
+                                        <span class="article-date"><i class="fa fa-calendar"></i> 4 hours ago</span>
                                     </p>
                                 </header>
                             </article><!-- News block -->
@@ -537,7 +557,7 @@
                                     </h3>
                                     <p class="simple-share">
                                         by <a href="#"><b>John Doe</b></a> -
-                                        <span class="article-date"><i class="fa fa-clock-o"></i> 12 hours ago</span>
+                                        <span class="article-date"><i class="fa fa-calendar"></i> 12 hours ago</span>
                                     </p>
                                 </header>
                             </article><!-- News block -->
@@ -624,7 +644,7 @@
                                             <a href="#">9 Apps for Transforming Your Phone into The Ultimate Toolkit</a>
                                         </h3>
                                         <p class="simple-share">
-                                            <span><i class="fa fa-clock-o"></i> 920,540 views</span>
+                                            <span><i class="fa fa-calendar"></i> 920,540 views</span>
                                         </p>
                                     </header>
                                 </article>
@@ -640,7 +660,7 @@
                                             <a href="#">15 Books You Should Read Before They Become Movies This Year</a>
                                         </h3>
                                         <p class="simple-share">
-                                            <span><i class="fa fa-clock-o"></i> 780,540 views</span>
+                                            <span><i class="fa fa-calendar"></i> 780,540 views</span>
                                         </p>
                                     </header>
                                 </article>
@@ -656,7 +676,7 @@
                                             <a href="#">The 20 most important Instagram pictures of all time</a>
                                         </h3>
                                         <p class="simple-share">
-                                            <span><i class="fa fa-clock-o"></i> 725,566 views</span>
+                                            <span><i class="fa fa-calendar"></i> 725,566 views</span>
                                         </p>
                                     </header>
                                 </article>
@@ -675,7 +695,7 @@
                                             <a href="#">7 Tips for Creating a Functional Home Workspace</a>
                                         </h3>
                                         <p class="simple-share">
-                                            <span><i class="fa fa-clock-o"></i> 2 minutes ago</span>
+                                            <span><i class="fa fa-calendar"></i> 2 minutes ago</span>
                                         </p>
                                     </header>
                                 </article>
@@ -691,7 +711,7 @@
                                             <a href="#">Does going to the gym count as a sport?</a>
                                         </h3>
                                         <p class="simple-share">
-                                            <span><i class="fa fa-clock-o"></i> 2 minutes ago</span>
+                                            <span><i class="fa fa-calendar"></i> 2 minutes ago</span>
                                         </p>
                                     </header>
                                 </article>
@@ -707,7 +727,7 @@
                                             <a href="#">Older actors still hot in Hollywood</a>
                                         </h3>
                                         <p class="simple-share">
-                                            <span><i class="fa fa-clock-o"></i> 3 minutes ago</span>
+                                            <span><i class="fa fa-calendar"></i> 3 minutes ago</span>
                                         </p>
                                     </header>
                                 </article>
@@ -723,7 +743,7 @@
                                             <a href="#">5 Gadget Gifts for Father's Day</a>
                                         </h3>
                                         <p class="simple-share">
-                                            <span><i class="fa fa-clock-o"></i> 3 minutes ago</span>
+                                            <span><i class="fa fa-calendar"></i> 3 minutes ago</span>
                                         </p>
                                     </header>
                                 </article>
@@ -739,7 +759,7 @@
                                             <a href="#">Inside U2's Ambitious Upcoming Tour Strategy</a>
                                         </h3>
                                         <p class="simple-share">
-                                            <span><i class="fa fa-clock-o"></i> 5 minutes ago</span>
+                                            <span><i class="fa fa-calendar"></i> 5 minutes ago</span>
                                         </p>
                                     </header>
                                 </article>
@@ -758,7 +778,7 @@
                                             <a href="#">How to Buy the Right Headphones</a>
                                         </h3>
                                         <p class="simple-share">
-                                            <span><i class="fa fa-clock-o"></i> 12 minutes ago</span>
+                                            <span><i class="fa fa-calendar"></i> 12 minutes ago</span>
                                         </p>
                                     </div>
                                 </div>
@@ -774,7 +794,7 @@
                                             <a href="#">6 Tips Before Traveling Internationally</a>
                                         </h3>
                                         <p class="simple-share">
-                                            <span><i class="fa fa-clock-o"></i> 26 minutes ago</span>
+                                            <span><i class="fa fa-calendar"></i> 26 minutes ago</span>
                                         </p>
                                     </div>
                                 </div>
@@ -790,7 +810,7 @@
                                             <a href="#">The Partnership of Coffee and Tech</a>
                                         </h3>
                                         <p class="simple-share">
-                                            <span><i class="fa fa-clock-o"></i> 34 minutes ago</span>
+                                            <span><i class="fa fa-calendar"></i> 34 minutes ago</span>
                                         </p>
                                     </div>
                                 </div>
@@ -806,7 +826,7 @@
                                             <a href="#">8 Ways to Know If Your Business Is Ready to Franchise</a>
                                         </h3>
                                         <p class="simple-share">
-                                            <span><i class="fa fa-clock-o"></i> 40 minutes ago</span>
+                                            <span><i class="fa fa-calendar"></i> 40 minutes ago</span>
                                         </p>
                                     </div>
                                 </div>
@@ -822,7 +842,7 @@
                                             <a href="#">Tickets and prices for Metro and public transport in Milan</a>
                                         </h3>
                                         <p class="simple-share">
-                                            <span><i class="fa fa-clock-o"></i> 54 minutes ago</span>
+                                            <span><i class="fa fa-calendar"></i> 54 minutes ago</span>
                                         </p>
                                     </div>
                                 </div>
@@ -1100,7 +1120,7 @@
                                 <a href="#">Older actors still hot in Hollywood</a>
                             </h3>
                             <p class="simple-share">
-                                <span><i class="fa fa-clock-o"></i> 3 minutes ago</span>
+                                <span><i class="fa fa-calendar"></i> 3 minutes ago</span>
                             </p>
                         </header>
                     </article>
@@ -1160,7 +1180,7 @@
                                 <a href="#">Inside U2's Ambitious Upcoming Tour Strategy</a>
                             </h3>
                             <p class="simple-share">
-                                <span><i class="fa fa-clock-o"></i> 5 minutes ago</span>
+                                <span><i class="fa fa-calendar"></i> 5 minutes ago</span>
                             </p>
                         </header>
                     </article>
@@ -1221,7 +1241,7 @@
                                 <a href="#">Does going to the gym count as a sport?</a>
                             </h3>
                             <p class="simple-share">
-                                <span><i class="fa fa-clock-o"></i> 2 minutes ago</span>
+                                <span><i class="fa fa-calendar"></i> 2 minutes ago</span>
                             </p>
                         </header>
                     </article>
@@ -1292,7 +1312,7 @@
                             <p>As you wish. Dantooine. They're on Dantooine. Alderaan? I'm not going to Alderaan. I've got to go home. It's late, I'm in for it as it is. Red Five standing by.</p>
                             <p class="simple-share">
                                 by <a href="#"><b>John Doe</b></a> -
-                                <span class="article-date"><i class="fa fa-clock-o"></i> 10 minutes ago</span>
+                                <span class="article-date"><i class="fa fa-calendar"></i> 10 minutes ago</span>
                             </p>
                         </header>
                     </article>
@@ -1308,7 +1328,7 @@
                             <p class="simple-share">
                                 <a href="#">Business</a> /
                                 by <a href="#">John Doe</a> -
-                                <span><i class="fa fa-clock-o"></i> 23 minutes ago</span>
+                                <span><i class="fa fa-calendar"></i> 23 minutes ago</span>
                             </p>
 
                             <h3>
@@ -1331,7 +1351,7 @@
                             <p class="simple-share">
                                 <a href="#">Business</a> /
                                 by <a href="#">John Doe</a> -
-                                <span><i class="fa fa-clock-o"></i> 49 minutes ago</span>
+                                <span><i class="fa fa-calendar"></i> 49 minutes ago</span>
                             </p>
 
                             <h3>
@@ -1355,7 +1375,7 @@
                             <p class="simple-share">
                                 <a href="#">Business</a> /
                                 by <a href="#">John Doe</a> -
-                                <span><i class="fa fa-clock-o"></i> 1 hour ago</span>
+                                <span><i class="fa fa-calendar"></i> 1 hour ago</span>
                             </p>
 
                             <h3>
@@ -1378,7 +1398,7 @@
                             <p class="simple-share">
                                 <a href="#">Business</a> /
                                 by <a href="#">John Doe</a> -
-                                <span><i class="fa fa-clock-o"></i> 2 hours ago</span>
+                                <span><i class="fa fa-calendar"></i> 2 hours ago</span>
                             </p>
 
                             <h3>
@@ -1402,7 +1422,7 @@
                             <p class="simple-share">
                                 <a href="#">Business</a> /
                                 by <a href="#">John Doe</a> -
-                                <span><i class="fa fa-clock-o"></i> 2 hours ago</span>
+                                <span><i class="fa fa-calendar"></i> 2 hours ago</span>
                             </p>
 
                             <h3>
