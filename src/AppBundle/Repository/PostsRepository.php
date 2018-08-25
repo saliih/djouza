@@ -20,6 +20,7 @@ class PostsRepository extends \Doctrine\ORM\EntityRepository
 
         $query = $query->add('where', $query->expr()->in('c', ':c'))
             ->setParameter('c', $category);
+        $query->andWhere('a.image is not null');
         if ($limit) {
             $query->setMaxResults($limit);
         }

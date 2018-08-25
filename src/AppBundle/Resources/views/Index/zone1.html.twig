@@ -1,0 +1,31 @@
+<div class="col-md-4">
+
+    <h3 class="top-title block-title"><span>{{ categories[0] }}</span></h3>
+    {% for item in posts %}
+        <article class="news-block small-block">
+{% if item.image != "" %}
+            <a href="{# path('article',{slug:item.slug}) #}" class="overlay-link">
+                <figure class="image-overlay">
+
+                    <img src="{{ asset(item.image) | imagine_filter('350x230') }}" alt="{{ item.title }}"/>
+                </figure>
+            </a>
+            {% endif %}
+            <a href="#" class="category">
+                {{ item.categories[0] }}
+            </a>
+            <header class="news-details">
+                <h3 class="news-title">
+                    <a href="{# path('article',{slug:item.slug}) #}">
+                        {{ item.title }}
+                    </a>
+                </h3>
+                <p class="simple-share">
+                    par <a href="#"><b>Djouza</b></a> -
+                    <span class="article-date"><i class="fa fa-calendar"></i> {{ item.dcr |date('d/m/Y') }}</span>
+                </p>
+            </header>
+        </article><!-- News block -->
+    {% endfor %}
+
+</div>

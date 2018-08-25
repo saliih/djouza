@@ -17,23 +17,22 @@ class DefaultController extends Controller
         $sidePosts = $this->getDoctrine()->getRepository('AppBundle:Posts')->findBy(
             array('status' => true), array('dcr' => "DESC"), 10
         );
-        $tabCatOriental = $this->getCategories(4);
-        $orientalCat = $this->getDoctrine()->getRepository("AppBundle:Posts")->getPostsByCategories($tabCatOriental, 4);
-        $tabCatRSucree = $this->getCategories(42);
-        $rSucreeCat = $this->getDoctrine()->getRepository("AppBundle:Posts")->getPostsByCategories($tabCatRSucree, 6);
-        $tabBoulange = $this->getCategories(32);
-        $boulangeCat = $this->getDoctrine()->getRepository("AppBundle:Posts")->getPostsByCategories($tabBoulange, 11);
+
+
         return $this->render('AppBundle:Index:index.html.twig', [
             "sidePosts" => $sidePosts,
-            "orientalCat" => $orientalCat,
-            "tabCatOriental" => $tabCatOriental,
-            "tabCatRSucree" => $tabCatRSucree,
-            "rSucreeCat" => $rSucreeCat,
-            "tabBoulange" => $tabBoulange,
-            "boulangeCat" => $boulangeCat,
+
         ]);
     }
+    public function zone1Action($id, $limit){
+        $categories = $this->getCategories($id);
+        $posts = $this->getDoctrine()->getRepository("AppBundle:Posts")->getPostsByCategories($categories, $limit);
+        return $this->render('AppBundle:Index:zone1.html.twig', [
+            "categories" => $categories,
+            "posts" => $posts,
 
+        ]);
+    }
     /**
      * @Route("/contact", name="contactpage")
      */

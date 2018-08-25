@@ -27,18 +27,8 @@ liip_imagine:
             filters:
                 upscale: { min: [350, 350] }
                 thumbnail: { size: [350, 350], mode: outbound , format: png  }
-        540x355:
-            quality: 100
-            filters:
-                upscale: { min: [540, 355] }
-                thumbnail: { size: [540, 355], mode: outbound , format: png  }
         350x230:
             quality: 100
             filters:
                 upscale: { min: [350, 230] }
                 thumbnail: { size: [350, 230], mode: outbound , format: png  }
-        160x105:
-            quality: 100
-            filters:
-                upscale: { min: [160, 105] }
-                thumbnail: { size: [160, 105], mode: outbound , format: png  }
