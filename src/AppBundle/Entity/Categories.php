@@ -356,4 +356,14 @@ class Categories
     {
         $this->menu = $menu;
     }
+
+    /**
+     * Get menu
+     *
+     * @return boolean
+     */
+    public function getMenu()
+    {
+        return $this->menu;
+    }
 }

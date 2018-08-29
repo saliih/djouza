@@ -133,6 +133,14 @@ class Posts
      *      )
      */
     private $categories;
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tags")
+     * @ORM\JoinTable(name="post_tags",
+     *      joinColumns={@ORM\JoinColumn(name="post_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="tags_id", referencedColumnName="id", unique=false)}
+     *      )
+     */
+    private $tags;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comments", mappedBy="post", cascade={"persist"})
@@ -143,6 +151,9 @@ class Posts
         return (string)$this->getTitle();
     }
 
+    public function removeAllTags(){
+        $this->tags = [];
+    }
     /**
      * Constructor
      */
@@ -150,6 +161,7 @@ class Posts
     {
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = 0;
         $this->commentStatus = true;
         $this->nofollow = false;
@@ -551,5 +563,39 @@ class Posts
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \AppBundle\Entity\Tags $tag
+     *
+     * @return Posts
+     */
+    public function addTag(\AppBundle\Entity\Tags $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \AppBundle\Entity\Tags $tag
+     */
+    public function removeTag(\AppBundle\Entity\Tags $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

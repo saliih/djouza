@@ -50,15 +50,17 @@
                     </div><!-- .post-content -->
 
                     <footer class="post-meta">
+                        {% if article.tags |length > 0 %}
                         <div class="tags-wrapper">
                             <ul class="tags-widget clearfix">
                                 <li class="trending">TAGS:</li>
-                                <li><a href="#">Creative</a></li>
-                                <li><a href="#">Wood</a></li>
-                                <li><a href="#">Advice</a></li>
+                                {% for item in article.tags %}
+                                    <li><a href="#">{{ item }}</a></li>
+                                {% endfor %}
+
                             </ul>
                         </div><!-- .tags-wrapper -->
-
+{% endif %}
                         <div class="share-wrapper clearfix">
                             <div class="total-shares">
                                 <em id="countUp" data-count="267">267</em>
@@ -85,31 +87,31 @@
                                 </a>
                             </div>
                         </div>
+                        {#
+                                                <div class="row">
+                                                    <div class="post-nav-wrapper clearfix">
+                                                        <div class="col-md-6 omega">
+                                                            <div class="previous-post">
+                                                                <div class="post-nav-label">
+                                                                    <i class="fa fa-angle-left"></i>
+                                                                    Previous post
+                                                                </div>
+                                                                <a href="#" class="post-nav-title">4 apps that every smartphone must get right</a>
+                                                            </div>
+                                                        </div>
 
-                        <div class="row">
-                            <div class="post-nav-wrapper clearfix">
-                                <div class="col-md-6 omega">
-                                    <div class="previous-post">
-                                        <div class="post-nav-label">
-                                            <i class="fa fa-angle-left"></i>
-                                            Previous post
-                                        </div>
-                                        <a href="#" class="post-nav-title">4 apps that every smartphone must get right</a>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 alpha">
-                                    <div class="next-post">
-                                        <div class="post-nav-label">
-                                            Next post
-                                            <i class="fa fa-angle-right"></i>
-                                        </div>
-                                        <a href="#" class="post-nav-title">What the Viny "Comeback" Really Looks Like</a>
-                                    </div>
-                                </div>
-                            </div><!-- .post-nav-wrapper -->
-                        </div>
-
+                                                        <div class="col-md-6 alpha">
+                                                            <div class="next-post">
+                                                                <div class="post-nav-label">
+                                                                    Next post
+                                                                    <i class="fa fa-angle-right"></i>
+                                                                </div>
+                                                                <a href="#" class="post-nav-title">What the Viny "Comeback" Really Looks Like</a>
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- .post-nav-wrapper -->
+                                                </div>
+                        #}
                         {# <div class="author-box clearfix">
                              <div class="author-avatar">
                                  <a href="page_author.html">
