@@ -82,7 +82,7 @@ class Categories
      **/
     private $parent;
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Posts", mappedBy="categories")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Posts", mappedBy="category")
      */
     private $posts;
 
@@ -162,6 +162,30 @@ class Categories
     }
 
     /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Categories
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
      * Set act
      *
      * @param boolean $act
@@ -183,6 +207,30 @@ class Categories
     public function getAct()
     {
         return $this->act;
+    }
+
+    /**
+     * Set menu
+     *
+     * @param boolean $menu
+     *
+     * @return Categories
+     */
+    public function setMenu($menu)
+    {
+        $this->menu = $menu;
+
+        return $this;
+    }
+
+    /**
+     * Get menu
+     *
+     * @return boolean
+     */
+    public function getMenu()
+    {
+        return $this->menu;
     }
 
     /**
@@ -323,47 +371,5 @@ class Categories
     public function getPosts()
     {
         return $this->posts;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param string $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isMenu()
-    {
-        return $this->menu;
-    }
-
-    /**
-     * @param bool $menu
-     */
-    public function setMenu($menu)
-    {
-        $this->menu = $menu;
-    }
-
-    /**
-     * Get menu
-     *
-     * @return boolean
-     */
-    public function getMenu()
-    {
-        return $this->menu;
     }
 }

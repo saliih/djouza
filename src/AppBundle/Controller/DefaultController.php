@@ -25,10 +25,10 @@ class DefaultController extends Controller
         ]);
     }
     public function zone1Action($id, $limit){
-        $categories = $this->getCategories($id);
-        $posts = $this->getDoctrine()->getRepository("AppBundle:Posts")->getPostsByCategories($categories, $limit);
+        $category = $this->getDoctrine()->getRepository('AppBundle:Categories')->find($id);
+        $posts = $this->getDoctrine()->getRepository("AppBundle:Posts")->findBy(['category'=>$category],[], $limit);
         return $this->render('AppBundle:Index:zone1.html.twig', [
-            "categories" => $categories,
+            "category" => $category,
             "posts" => $posts,
 
         ]);

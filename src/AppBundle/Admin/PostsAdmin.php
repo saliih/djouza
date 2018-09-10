@@ -36,7 +36,7 @@ class PostsAdmin extends Admin
         $listMapper
             ->add('image','string', array('label'=>"Photo",'template'=>'@App/AdminPost/image.html.twig'))
             ->add('title')
-            ->add('categories')
+            ->add('category')
             ->add('dcr')
             ->add('_action', 'actions', array(
                 'actions' => array(
@@ -59,7 +59,7 @@ class PostsAdmin extends Admin
 
                 ->end()
                 ->with('Parametre affichage', array('class' => "col-md-4"))
-                    ->add('categories')
+                    ->add('category')
                     ->add('dcr', 'sonata_type_date_picker', array('dp_language' => 'fr', 'format' => 'dd/MM/yyyy', 'label' => 'date de publication'))
                     ->add('status')
                     ->add('commentStatus')
@@ -114,6 +114,9 @@ class PostsAdmin extends Admin
         //$menu->addChild('Import File', array('uri' => $admin->generateUrl('importfile')));
         $menu->addChild('Commentaires '."($comment)", array('uri' => $admin->generateUrl('admin.comments.list', array('id' => $id))))
             ->setAttribute('icon', 'fa fa-comment')
+            ->setLinkAttribute('class', 'tabulataion');
+        $menu->addChild('Redirections', array('uri' => $admin->generateUrl('admin.redirection.list', array('id' => $id))))
+            ->setAttribute('icon', 'fa fa-link')
             ->setLinkAttribute('class', 'tabulataion');
     }
 }

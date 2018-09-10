@@ -74,17 +74,10 @@ WHERE tt.taxonomy IN ('category') AND tr.object_id = (".$row['ID'].");";
             $stmtcat = $con->prepare($sqlcat);
             $stmtcat->execute();
             while($rowscat = $stmtcat->fetch()){
-                $exist = false;
-                /** @var Categories $category */
-                foreach ($post->getCategories() as $category){
-                    if($category->getOldId() == $rowscat['term_id']){
-                        $exist = true;
-                    }
-                }
-                if(!$exist){
-                    $cat = $container->get('doctrine')->getRepository('AppBundle:Categories')->findOneBy(array('oldId'=>$rowscat['term_id']));
-                    $post->addCategory($cat);
-                }
+                $cat = $container->get('doctrine')->getRepository('AppBundle:Categories')
+                    ->findOneBy(array('oldId'=>$rowscat['term_id']));
+                $post->setCategory($cat);
+
             }
 
 

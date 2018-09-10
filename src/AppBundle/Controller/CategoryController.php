@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         $paginator = $this->get('knp_paginator');
         $categoy = $this->getDoctrine()->getRepository('AppBundle:Categories')->findOneBy(array('slug'=>$slug));
-        $posts =  $this->getDoctrine()->getRepository('AppBundle:Posts')->getPostsByCategories($categoy);
+        $posts =  $this->getDoctrine()->getRepository('AppBundle:Posts')->findBy(['category'=>$categoy]);
 
         $pagination = $paginator->paginate(
             $posts,

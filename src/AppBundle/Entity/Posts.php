@@ -126,13 +126,10 @@ class Posts
      */
     private $oldId;
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categories")
-     * @ORM\JoinTable(name="post_categories",
-     *      joinColumns={@ORM\JoinColumn(name="post_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="categories_id", referencedColumnName="id", unique=false)}
-     *      )
-     */
-    private $categories;
+     * @ORM\ManyToOne(targetEntity="Categories", inversedBy="posts")
+     * @ORM\JoinColumn(name="cat_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     **/
+    private $category;
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tags")
      * @ORM\JoinTable(name="post_tags",
@@ -146,6 +143,11 @@ class Posts
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comments", mappedBy="post", cascade={"persist"})
      */
     private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Redirection", mappedBy="post", cascade={"persist"})
+     */
+    private $redirections;
     public function __toString()
     {
         return (string)$this->getTitle();
@@ -154,22 +156,24 @@ class Posts
     public function removeAllTags(){
         $this->tags = [];
     }
+
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->redirections = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->status = 0;
         $this->commentStatus = true;
         $this->nofollow = false;
     }
+
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -225,6 +229,22 @@ class Posts
     }
 
     /**
+     * Set body
+     *
+     * @param string $body
+     *
+     * @return Posts
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
      * @return string
      */
     public function getBody()
@@ -232,13 +252,6 @@ class Posts
         return $this->body;
     }
 
-    /**
-     * @param string $body
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-    }
     /**
      * Set title
      *
@@ -266,7 +279,7 @@ class Posts
     /**
      * Set status
      *
-     * @param integer $status
+     * @param boolean $status
      *
      * @return Posts
      */
@@ -280,7 +293,7 @@ class Posts
     /**
      * Get status
      *
-     * @return int
+     * @return boolean
      */
     public function getStatus()
     {
@@ -304,11 +317,35 @@ class Posts
     /**
      * Get commentStatus
      *
-     * @return bool
+     * @return boolean
      */
     public function getCommentStatus()
     {
         return $this->commentStatus;
+    }
+
+    /**
+     * Set nofollow
+     *
+     * @param boolean $nofollow
+     *
+     * @return Posts
+     */
+    public function setNofollow($nofollow)
+    {
+        $this->nofollow = $nofollow;
+
+        return $this;
+    }
+
+    /**
+     * Get nofollow
+     *
+     * @return boolean
+     */
+    public function getNofollow()
+    {
+        return $this->nofollow;
     }
 
     /**
@@ -336,6 +373,174 @@ class Posts
     }
 
     /**
+     * Set seoKeywords
+     *
+     * @param string $seoKeywords
+     *
+     * @return Posts
+     */
+    public function setSeoKeywords($seoKeywords)
+    {
+        $this->seoKeywords = $seoKeywords;
+
+        return $this;
+    }
+
+    /**
+     * Get seoKeywords
+     *
+     * @return string
+     */
+    public function getSeoKeywords()
+    {
+        return $this->seoKeywords;
+    }
+
+    /**
+     * Set seoTitle
+     *
+     * @param string $seoTitle
+     *
+     * @return Posts
+     */
+    public function setSeoTitle($seoTitle)
+    {
+        $this->seoTitle = $seoTitle;
+
+        return $this;
+    }
+
+    /**
+     * Get seoTitle
+     *
+     * @return string
+     */
+    public function getSeoTitle()
+    {
+        return $this->seoTitle;
+    }
+
+    /**
+     * Set seoDescription
+     *
+     * @param string $seoDescription
+     *
+     * @return Posts
+     */
+    public function setSeoDescription($seoDescription)
+    {
+        $this->seoDescription = $seoDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get seoDescription
+     *
+     * @return string
+     */
+    public function getSeoDescription()
+    {
+        return $this->seoDescription;
+    }
+
+    /**
+     * Set preptime
+     *
+     * @param string $preptime
+     *
+     * @return Posts
+     */
+    public function setPreptime($preptime)
+    {
+        $this->preptime = $preptime;
+
+        return $this;
+    }
+
+    /**
+     * Get preptime
+     *
+     * @return string
+     */
+    public function getPreptime()
+    {
+        return $this->preptime;
+    }
+
+    /**
+     * Set cooktime
+     *
+     * @param string $cooktime
+     *
+     * @return Posts
+     */
+    public function setCooktime($cooktime)
+    {
+        $this->cooktime = $cooktime;
+
+        return $this;
+    }
+
+    /**
+     * Get cooktime
+     *
+     * @return string
+     */
+    public function getCooktime()
+    {
+        return $this->cooktime;
+    }
+
+    /**
+     * Set totaltime
+     *
+     * @param string $totaltime
+     *
+     * @return Posts
+     */
+    public function setTotaltime($totaltime)
+    {
+        $this->totaltime = $totaltime;
+
+        return $this;
+    }
+
+    /**
+     * Get totaltime
+     *
+     * @return string
+     */
+    public function getTotaltime()
+    {
+        return $this->totaltime;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Posts
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
      * Set oldId
      *
      * @param integer $oldId
@@ -360,175 +565,61 @@ class Posts
     }
 
     /**
-     * Add category
+     * Set category
      *
      * @param \AppBundle\Entity\Categories $category
      *
      * @return Posts
      */
-    public function addCategory(\AppBundle\Entity\Categories $category)
+    public function setCategory(\AppBundle\Entity\Categories $category = null)
     {
-        $this->categories[] = $category;
+        $this->category = $category;
 
         return $this;
     }
 
     /**
-     * Remove category
+     * Get category
      *
-     * @param \AppBundle\Entity\Categories $category
+     * @return \AppBundle\Entity\Categories
      */
-    public function removeCategory(\AppBundle\Entity\Categories $category)
+    public function getCategory()
     {
-        $this->categories->removeElement($category);
+        return $this->category;
     }
 
     /**
-     * Get categories
+     * Add tag
+     *
+     * @param \AppBundle\Entity\Tags $tag
+     *
+     * @return Posts
+     */
+    public function addTag(\AppBundle\Entity\Tags $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \AppBundle\Entity\Tags $tag
+     */
+    public function removeTag(\AppBundle\Entity\Tags $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCategories()
+    public function getTags()
     {
-        return $this->categories;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSeoKeywords()
-    {
-        return $this->seoKeywords;
-    }
-
-    /**
-     * @param string $seoKeywords
-     */
-    public function setSeoKeywords($seoKeywords)
-    {
-        $this->seoKeywords = $seoKeywords;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSeoTitle()
-    {
-        return $this->seoTitle;
-    }
-
-    /**
-     * @param string $seoTitle
-     */
-    public function setSeoTitle($seoTitle)
-    {
-        $this->seoTitle = $seoTitle;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSeoDescription()
-    {
-        return $this->seoDescription;
-    }
-
-    /**
-     * @param string $seoDescription
-     */
-    public function setSeoDescription($seoDescription)
-    {
-        $this->seoDescription = $seoDescription;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isNofollow()
-    {
-        return $this->nofollow;
-    }
-
-    /**
-     * @param bool $nofollow
-     */
-    public function setNofollow($nofollow)
-    {
-        $this->nofollow = $nofollow;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPreptime()
-    {
-        return $this->preptime;
-    }
-
-    /**
-     * @param string $preptime
-     */
-    public function setPreptime($preptime)
-    {
-        $this->preptime = $preptime;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCooktime()
-    {
-        return $this->cooktime;
-    }
-
-    /**
-     * @param string $cooktime
-     */
-    public function setCooktime($cooktime)
-    {
-        $this->cooktime = $cooktime;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTotaltime()
-    {
-        return $this->totaltime;
-    }
-
-    /**
-     * @param string $totaltime
-     */
-    public function setTotaltime($totaltime)
-    {
-        $this->totaltime = $totaltime;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param string $image
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-    }
-
-    /**
-     * Get nofollow
-     *
-     * @return boolean
-     */
-    public function getNofollow()
-    {
-        return $this->nofollow;
+        return $this->tags;
     }
 
     /**
@@ -566,36 +657,36 @@ class Posts
     }
 
     /**
-     * Add tag
+     * Add redirection
      *
-     * @param \AppBundle\Entity\Tags $tag
+     * @param \AppBundle\Entity\Redirection $redirection
      *
      * @return Posts
      */
-    public function addTag(\AppBundle\Entity\Tags $tag)
+    public function addRedirection(\AppBundle\Entity\Redirection $redirection)
     {
-        $this->tags[] = $tag;
+        $this->redirections[] = $redirection;
 
         return $this;
     }
 
     /**
-     * Remove tag
+     * Remove redirection
      *
-     * @param \AppBundle\Entity\Tags $tag
+     * @param \AppBundle\Entity\Redirection $redirection
      */
-    public function removeTag(\AppBundle\Entity\Tags $tag)
+    public function removeRedirection(\AppBundle\Entity\Redirection $redirection)
     {
-        $this->tags->removeElement($tag);
+        $this->redirections->removeElement($redirection);
     }
 
     /**
-     * Get tags
+     * Get redirections
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTags()
+    public function getRedirections()
     {
-        return $this->tags;
+        return $this->redirections;
     }
 }

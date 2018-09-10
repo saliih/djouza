@@ -1,6 +1,6 @@
 <div class="col-md-4">
 
-    <h3 class="top-title block-title"><span>{{ categories[0] }}</span></h3>
+    <h3 class="top-title block-title"><span>{{ category }}</span></h3>
     {% for item in posts %}
         <article class="news-block small-block">
 {% if item.image != "" %}
@@ -12,7 +12,7 @@
             </a>
             {% endif %}
             <a href="#" class="category">
-                {{ item.categories[0] }}
+                {{ item.category }}
             </a>
             <header class="news-details">
                 <h3 class="news-title">

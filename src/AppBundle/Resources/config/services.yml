@@ -6,6 +6,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: "Post" ,label: 'Recettes', icon:'<i class="fa fa-envelope"></i>' }
         calls:
             - [addChild, ['@admin.comments']]
+            - [addChild, ['@admin.redirection']]
             - [ setTemplate, ['edit', 'AppBundle:AdminPost:edit.html.twig']]
 
     admin.category:
@@ -18,6 +19,16 @@ services:
         arguments: [~, AppBundle\Entity\Comments, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Post" ,label: 'Commentaires', icon:'<i class="fa fa-envelope"></i>' }
+    admin.tags:
+        class: AppBundle\Admin\TagsAdmin
+        arguments: [~, AppBundle\Entity\Tags, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Post" ,label: 'Tags', icon:'<i class="fa fa-envelope"></i>' }
+    admin.redirection:
+        class: AppBundle\Admin\RedirectionAdmin
+        arguments: [~, AppBundle\Entity\Redirection, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Post" ,label: 'Gestion des redirections', icon:'<i class="fa fa-envelope"></i>' }
 
     admin.videos:
         class: AppBundle\Admin\VideosAdmin

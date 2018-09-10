@@ -34,7 +34,7 @@
                                                 <img alt="{{ item.title }}" src="{{ asset(item.image) | imagine_filter('730x320') }}" />
                                             </a>
                                             <header class="featured-header">
-                                                <a class="category bgcolor2" href="#">{{ item.categories[0] }}</a>
+                                                <a class="category bgcolor2" href="#">{{ item.category }}</a>
                                                 <h2><a href="{{ path('article',{slug:item.slug}) }}">{{ item.title }}</a></h2>
                                                 <p class="simple-share">
                                                     par <a href="#"><b>Djouza</b></a> -
@@ -50,7 +50,7 @@
                                                 <img alt="{{ item.title }}" src="{{ asset(item.image) | imagine_filter('350x350') }}"/>
                                             </a>
                                             <header class="featured-header">
-                                                <a class="category bgcolor2" href="#">{{ item.categories[0] }}</a>
+                                                <a class="category bgcolor2" href="#">{{ item.category }}</a>
                                                 <h2><a href="{{ path('article',{slug:item.slug}) }}">{{ item.title }}</a></h2>
                                                 <p class="simple-share">
                                                     Par <a href="#"><b>Djouza</b></a> -
