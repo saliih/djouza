@@ -20,10 +20,6 @@ use Sonata\AdminBundle\Admin\AdminInterface;
 
 class RedirectionAdmin extends Admin
 {
-    /**
-     * @var string
-     */
-    protected $parentAssociationMapping = 'post';
 
     /**
      * @param ListMapper $listMapper
@@ -33,20 +29,25 @@ class RedirectionAdmin extends Admin
         $listMapper
             ->add('new')
             ->add('old')
-            ->add('post')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'delete' => array(),
                 )
             ));
     }
-
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->add('new')
+        ->add('old')
+        ;
+    }
     /**
      * @param RouteCollection $collection
      */
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->remove('create');
-        $collection->remove('remove');
+        //$collection->remove('create');
+        //$collection->remove('remove');
     }
 }

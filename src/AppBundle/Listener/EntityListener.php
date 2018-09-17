@@ -46,7 +46,6 @@ class EntityListener
                         $redirect->setOld($data[1]);
                         $redirect->setPost($document);
                         $this->em->getManager()->persist($redirect);
-                        //$this->em->getManager()->flush();
                     // TODO : no flush
                 }
             }

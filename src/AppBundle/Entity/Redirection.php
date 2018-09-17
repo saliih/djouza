@@ -24,22 +24,16 @@ class Redirection
     /**
      * @var string
      *
-     * @ORM\Column(name="old", type="string", length=255)
+     * @ORM\Column(name="old", type="text", nullable=false)
      */
     private $old;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="new", type="string", length=255)
+     * @ORM\Column(name="new", type="text", nullable=false)
      */
     private $new;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Posts", inversedBy="redirections")
-     * @ORM\JoinColumn(name="post_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
-     **/
-    private $post;
 
     /**
      * Get id
@@ -97,29 +91,5 @@ class Redirection
     public function getNew()
     {
         return $this->new;
-    }
-
-    /**
-     * Set post
-     *
-     * @param \AppBundle\Entity\Posts $post
-     *
-     * @return Redirection
-     */
-    public function setPost(\AppBundle\Entity\Posts $post = null)
-    {
-        $this->post = $post;
-
-        return $this;
-    }
-
-    /**
-     * Get post
-     *
-     * @return \AppBundle\Entity\Posts
-     */
-    public function getPost()
-    {
-        return $this->post;
     }
 }
