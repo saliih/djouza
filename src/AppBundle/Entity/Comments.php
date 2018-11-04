@@ -101,6 +101,11 @@ class Comments
         $this->act = false;
     }
 
+    public function __toString()
+    {
+        return (string)$this->body;
+    }
+
     /**
      * Get id
      *

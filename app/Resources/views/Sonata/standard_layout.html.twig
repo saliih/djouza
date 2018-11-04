@@ -36,6 +36,7 @@ file that was distributed with this source code.
                 <link rel="stylesheet" href="{{ asset(stylesheet) }}">
             {% endfor %}
         {% endblock %}
+        <link rel="stylesheet" href="{{ asset('bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}" />
 
         {% block javascripts %}
             {% block sonata_javascript_config %}
@@ -64,7 +65,13 @@ file that was distributed with this source code.
                     <script src="{{ asset(javascript) }}"></script>
                 {% endfor %}
             {% endblock %}
-
+            {% javascripts
+            'bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js'
+            '@AppBundle/Resources/public/vendor/notify.js'
+            '@AppBundle/Resources/public/admin/utils.js'
+            %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
             {# localize moment #}
             {% set localeForMoment = canonicalize_locale_for_moment() %}
             {% if localeForMoment %}
@@ -364,7 +371,23 @@ file that was distributed with this source code.
             </div>
         {% endblock sonata_wrapper %}
     </div>
+    <div class="modal fade" id="modalDialog" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
 
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
     {% if sonata_admin.adminPool.getOption('use_bootlint') %}
         {% block bootlint %}
             {# Bootlint - https://github.com/twbs/bootlint#in-the-browser #}

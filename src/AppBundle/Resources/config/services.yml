@@ -19,6 +19,8 @@ services:
         arguments: [~, AppBundle\Entity\Comments, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Post" ,label: 'Commentaires', icon:'<i class="fa fa-envelope"></i>' }
+        calls:
+            - [ setTemplate, ['list', 'AppBundle:AdminComments:list.html.twig']]
     admin.tags:
         class: AppBundle\Admin\TagsAdmin
         arguments: [~, AppBundle\Entity\Tags, ~]

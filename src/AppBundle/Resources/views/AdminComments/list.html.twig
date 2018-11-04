@@ -1,0 +1,10 @@
+{% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@AppBundle/Resources/public/admin/js/nested.js'
+        '@AppBundle/Resources/public/admin/utils.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
