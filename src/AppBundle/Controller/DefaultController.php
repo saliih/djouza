@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Categories;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,8 +27,31 @@ class DefaultController extends Controller
     }
     public function zone1Action($id, $limit){
         $category = $this->getDoctrine()->getRepository('AppBundle:Categories')->find($id);
-        $posts = $this->getDoctrine()->getRepository("AppBundle:Posts")->findBy(['category'=>$category],[], $limit);
+        $postService = $this->get('djouza.posts');
+        $posts = $postService->getPosts($category, $limit);
         return $this->render('AppBundle:Index:zone1.html.twig', [
+            "category" => $category,
+            "posts" => $posts,
+
+        ]);
+    }
+    public function bigZoneAction($id, $limit){
+        $category = $this->getDoctrine()->getRepository('AppBundle:Categories')->find($id);
+        $postService = $this->get('djouza.posts');
+        $posts = $postService->getPosts($category, $limit);
+        //$posts = $this->getDoctrine()->getRepository("")->findBy(['category'=>$category],[], $limit);
+        return $this->render('AppBundle:Index:bigzone.html.twig', [
+            "category" => $category,
+            "posts" => $posts,
+
+        ]);
+    }
+    public function bigZone2Action($id, $limit){
+        $category = $this->getDoctrine()->getRepository('AppBundle:Categories')->find($id);
+        $postService = $this->get('djouza.posts');
+        $posts = $postService->getPosts($category, $limit);
+        //$posts = $this->getDoctrine()->getRepository("")->findBy(['category'=>$category],[], $limit);
+        return $this->render('AppBundle:Index:bigzone2.html.twig', [
             "category" => $category,
             "posts" => $posts,
 

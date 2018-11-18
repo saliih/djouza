@@ -3,15 +3,16 @@
     <h3 class="top-title block-title"><span>{{ category }}</span></h3>
     {% for item in posts %}
         <article class="news-block small-block">
-{% if item.image != "" %}
-            <a href="{# path('article',{slug:item.slug}) #}" class="overlay-link">
-                <figure class="image-overlay">
 
+            <a href="{{ path('article',{slug:item.slug}) }}" class="overlay-link">
+                <figure class="image-overlay">
+                    {% if item.image != "" %}
                     <img src="{{ asset(item.image) | imagine_filter('350x230') }}" alt="{{ item.title }}"/>
+                    {% endif %}
                 </figure>
             </a>
-            {% endif %}
-            <a href="#" class="category">
+
+            <a href="{{ path('article',{slug:item.slug}) }}" class="category">
                 {{ item.category }}
             </a>
             <header class="news-details">

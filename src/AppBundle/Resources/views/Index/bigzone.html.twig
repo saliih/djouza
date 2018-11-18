@@ -1,0 +1,54 @@
+<div class="row">
+
+    <div class="col-md-12">
+        <h3 class="block-title"><span><a href="#">{{ category }}</a></span></h3>
+        {% for item in posts %}
+            {% if loop.index == 1 %}
+                <article class="news-block">
+                    <a href="{{ path('article',{slug:item.slug}) }}" class="overlay-link">
+                        <figure class="image-overlay">
+                            {% if item.image != "" %}
+                            <img src="{{ asset(item.image) | imagine_filter('540x355') }}" alt="{{ item.title }}"/>
+                            {% endif %}
+                        </figure>
+                    </a>
+                    <a href="#" class="category">
+                        {{ category }}
+                    </a>
+                    <div class="news-details">
+                        <h3 class="news-title">
+                            <a href="{{ path('article',{slug:item.slug}) }}">
+                                {{ item.title }}
+                            </a>
+                        </h3>
+                        <p>{{ item.body | shortdesc }}</p>
+                        <p class="simple-share">
+                            par <a href="#"><b>Djouza</b></a> -
+                            <span class="article-date"><i class="fa fa-calendar"></i> {{ item.dcr |date('d/m/Y') }}</span>
+                        </p>
+                    </div>
+                </article>
+            {% else %}
+                <article class="simple-post clearfix">
+                    <div class="simple-thumb">
+                        <a href="{{ path('article',{slug:item.slug}) }}">
+                {% if item.image != "" %}
+                            <img src="{{ asset(item.image) | imagine_filter('160x120') }}" alt=""/>
+                    {% endif %}
+                        </a>
+                    </div>
+                    <header>
+                        <h3>
+                            <a href="{{ path('article',{slug:item.slug}) }}">{{ item.title }}</a>
+                        </h3>
+                        <p class="simple-share">
+                            par <a href="#">Djouza</a> -
+                            <span><i class="fa fa-calendar"></i> {{ item.dcr |date('d/m/Y') }}</span>
+                        </p>
+                    </header>
+                </article>
+            {% endif %}
+        {% endfor %}
+
+    </div><!-- End mid column -->
+</div>

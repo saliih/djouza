@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends Controller
 {
     /**
-     * @Route("article/{slug}", name="article")
+     * @Route("{slug}", name="article")
      */
     public function indexAction($slug)
     {

@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-md-12">
+
+        <h3 class="block-title"><span><a href="#">{{ category }}</a></span></h3>
+        {% for item in posts %}
+            {% if loop.index == 1 %}
+                <article class="news-block big-block">
+                    <a href="{{ path('article',{slug:item.slug}) }}" class="overlay-link">
+                        <figure class="image-overlay">
+                            {% if item.image != "" %}
+                            <img src="{{ asset(item.image) | imagine_filter('730x480') }}" alt="{{ item.title }}"/>
+                            {% endif %}
+                        </figure>
+                    </a>
+                    <a href="#" class="category">
+                        {{ category }}
+                    </a>
+                    <header class="news-details">
+                        <h3 class="news-title">
+                            <a href="{{ path('article',{slug:item.slug}) }}">
+                               {{ item.title }}
+                            </a>
+                        </h3>
+                        <p>{{ item.body | shortdesc }}</p>
+                        <p class="simple-share">
+                            par <a href="#"><b>Djouza</b></a> -
+                            <span class="article-date"><i class="fa fa-calendar"></i> {{ item.dcr |date('d/m/Y') }}</span>
+                        </p>
+                    </header>
+                </article><!-- News block -->
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% for item in posts %}
+    {% if loop.index != 1 %}
+        {% if loop.index % 2 == 0 %}
+            <div class="row">
+        {% endif %}
+        <div class="col-md-6">
+            <article class="news-block small-block">
+                <a href="{{ path('article',{slug:item.slug}) }}" class="overlay-link">
+                    <figure class="image-overlay">
+        {% if item.image != "" %}
+                        <img src="{{ asset(item.image) | imagine_filter('350x230') }}" alt="{{ item.title }}"/>
+            {% endif %}
+                    </figure>
+                </a>
+                <a href="#" class="category">
+                    {{ category }}
+                </a>
+                <header class="news-details">
+                    <h3 class="news-title">
+                        <a href="{{ path('article',{slug:item.slug}) }}">
+                            {{ item.title }}
+                        </a>
+                    </h3>
+                    <p class="simple-share">
+                        par <a href="#"><b>Djouza</b></a> -
+                        <span class="article-date"><i class="fa fa-calendar"></i> {{ item.dcr |date('d/m/Y') }}</span>
+                    </p>
+                </header>
+            </article><!-- News block -->
+        </div>
+
+        {% if loop.index % 2 == 1 %}
+            </div>
+        {% endif %}
+    {% endif %}
+{% endfor %}

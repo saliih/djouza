@@ -143,6 +143,7 @@ WHERE tt.taxonomy IN ('category') AND tr.object_id = (".$row['ID'].");";
     }
     private function checkRedirection($slug){
         /**/
+        return $slug;
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
         $con = $em->getConnection();
@@ -173,6 +174,9 @@ WHERE tt.taxonomy IN ('category') AND tr.object_id = (".$row['ID'].");";
     }
     private function updateUrls($str){
         $str = str_replace('http://cuisinezavecdjouza.fr/', '', $str);
+        $str = str_replace('[caption', '<caption', $str);
+        $str = str_replace('[/caption]', '</caption>', $str);
+        $str = str_replace(']', '>', $str);
         $str = str_replace('https://cuisinezavecdjouza.fr/', '', $str);
         $str = str_replace('http://www.cuisinezavecdjouza.fr/', '', $str);
         $str = str_replace('https://www.cuisinezavecdjouza.fr/', '', $str);

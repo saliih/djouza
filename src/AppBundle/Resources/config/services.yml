@@ -1,4 +1,8 @@
 services:
+    djouza.posts:
+            class: AppBundle\Services\PostServices
+            arguments: ["@service_container", "@doctrine.orm.entity_manager"]
+
     admin.posts:
         class: AppBundle\Admin\PostsAdmin
         arguments: [~, AppBundle\Entity\Posts, ~]
