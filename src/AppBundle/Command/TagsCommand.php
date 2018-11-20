@@ -30,16 +30,16 @@ class TagsCommand extends ContainerAwareCommand
         $em = $container->get('doctrine')->getManager();
         $con = $em->getConnection();
         $sql = 'SELECT
-djouza.wp_posts.ID,
-djouza.wp_terms.`name`,
-djouza.wp_terms.slug,
-djouza.wp_term_taxonomy.description
-from djouza.wp_term_taxonomy 
-inner JOIN djouza.wp_terms on djouza.wp_terms.term_id = djouza.wp_term_taxonomy.term_id
-INNER JOIN djouza.wp_term_relationships on djouza.wp_term_relationships.term_taxonomy_id = djouza.wp_term_taxonomy.term_id
-INNER JOIN djouza.wp_posts on djouza.wp_posts.ID = djouza.wp_term_relationships.object_id
-WHERE djouza.wp_term_taxonomy.taxonomy = "post_tag"
-order by djouza.wp_posts.ID DESC';
+djizou.wp_posts.ID,
+djizou.wp_terms.`name`,
+djizou.wp_terms.slug,
+djizou.wp_term_taxonomy.description
+from djizou.wp_term_taxonomy 
+inner JOIN djizou.wp_terms on djizou.wp_terms.term_id = djizou.wp_term_taxonomy.term_id
+INNER JOIN djizou.wp_term_relationships on djizou.wp_term_relationships.term_taxonomy_id = djizou.wp_term_taxonomy.term_id
+INNER JOIN djizou.wp_posts on djizou.wp_posts.ID = djizou.wp_term_relationships.object_id
+WHERE djizou.wp_term_taxonomy.taxonomy = "post_tag"
+order by djizou.wp_posts.ID DESC';
         $stmt = $con->prepare($sql);
         $stmt->execute();
         $rows = $stmt->fetchAll();

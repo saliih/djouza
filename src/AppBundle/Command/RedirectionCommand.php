@@ -27,7 +27,7 @@ class RedirectionCommand extends ContainerAwareCommand
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
         $con = $em->getConnection();
-        $sql = "select * from djouza.wp_redirection_items where  status = 'enabled'  order by id ";
+        $sql = "select * from djizou.wp_redirection_items where  status = 'enabled'  order by id ";
         $stmtoptions = $con->prepare($sql);
         $stmtoptions->execute();
         while($redirect = $stmtoptions->fetch()) {

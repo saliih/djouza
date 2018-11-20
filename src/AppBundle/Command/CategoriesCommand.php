@@ -32,9 +32,9 @@ wp_terms.`name`,
 wp_terms.slug,
 wp_terms.term_group,
 wp_term_taxonomy.description,
-wp_term_taxonomy.parent from djouza.wp_terms
-INNER JOIN djouza.wp_term_taxonomy on djouza.wp_term_taxonomy.term_id = djouza.wp_terms.term_id
-where djouza.wp_term_taxonomy.taxonomy = 'category'";
+wp_term_taxonomy.parent from djizou.wp_terms
+INNER JOIN djizou.wp_term_taxonomy on djizou.wp_term_taxonomy.term_id = djizou.wp_terms.term_id
+where djizou.wp_term_taxonomy.taxonomy = 'category'";
         $stmt = $con -> prepare($sql);
 		$stmt -> execute();
 		$rows = $stmt->fetchAll();

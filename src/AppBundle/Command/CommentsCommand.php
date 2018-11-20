@@ -30,7 +30,7 @@ class CommentsCommand extends ContainerAwareCommand
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
         $con = $em->getConnection();
-        $sql = "SELECT * FROM djouza.wp_comments order by comment_parent asc";
+        $sql = "SELECT * FROM djizou.wp_comments order by comment_parent asc";
         $stmt = $con -> prepare($sql);
         $stmt -> execute();
         $rows = $stmt->fetchAll();

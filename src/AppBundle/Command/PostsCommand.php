@@ -33,7 +33,7 @@ class PostsCommand extends ContainerAwareCommand
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
         $con = $em->getConnection();
-        $sql = "SELECT * FROM djouza.wp_posts WHERE post_status='publish' and post_type = 'post'";
+        $sql = "SELECT * FROM djizou.wp_posts WHERE post_status='publish' and post_type = 'post'";
         $stmt = $con->prepare($sql);
         $stmt->execute();
         $rows = $stmt->fetchAll();
@@ -58,18 +58,18 @@ class PostsCommand extends ContainerAwareCommand
 
             $post->setSlug($this->checkRedirection($row['post_name']));
             // image
-            $postimage = "select guid from djouza.wp_posts where post_type='attachment' and post_parent = ".$row['ID']."  ORDER BY post_date desc limit 1";
+            $postimage = "select guid from djizou.wp_posts where post_type='attachment' and post_parent = ".$row['ID']."  ORDER BY post_date desc limit 1";
             $stmtimg = $con->prepare($postimage);
             $stmtimg->execute();
             $rowsimg = $stmtimg->fetch();
             $image = $rowsimg['guid'];
-            $imagename = str_replace('http://cuisinezavecdjouza.fr/wp-content/','',$image);
-            $imagename = str_replace('https://cuisinezavecdjouza.fr/wp-content/','',$imagename);
+            $imagename = str_replace('http://cuisinezavecdjizou.fr/wp-content/','',$image);
+            $imagename = str_replace('https://cuisinezavecdjizou.fr/wp-content/','',$imagename);
             $post->setImage($imagename);
             // category
-             $sqlcat = "SELECT t.term_id FROM djouza.wp_terms AS t 
-INNER JOIN djouza.wp_term_taxonomy AS tt ON (tt.term_id = t.term_id) 
-INNER JOIN djouza.wp_term_relationships AS tr ON (tr.term_taxonomy_id = tt.term_taxonomy_id) 
+             $sqlcat = "SELECT t.term_id FROM djizou.wp_terms AS t 
+INNER JOIN djizou.wp_term_taxonomy AS tt ON (tt.term_id = t.term_id) 
+INNER JOIN djizou.wp_term_relationships AS tr ON (tr.term_taxonomy_id = tt.term_taxonomy_id) 
 WHERE tt.taxonomy IN ('category') AND tr.object_id = (".$row['ID'].");";
             $stmtcat = $con->prepare($sqlcat);
             $stmtcat->execute();
@@ -82,7 +82,7 @@ WHERE tt.taxonomy IN ('category') AND tr.object_id = (".$row['ID'].");";
 
 
             // options
-            $sqlparams = "select * from djouza.wp_postmeta where post_id = " . $row['ID'] . " ";//and meta_key in ('_wp_attached_file','_aioseop_keywords','_aioseop_title','_aioseop_description','_aioseop_nofollow','_wp_attached_file')
+            $sqlparams = "select * from djizou.wp_postmeta where post_id = " . $row['ID'] . " ";//and meta_key in ('_wp_attached_file','_aioseop_keywords','_aioseop_title','_aioseop_description','_aioseop_nofollow','_wp_attached_file')
            /* if ($row['ID'] == 25584){
                 echo "\n";
             $output->writeln($sqlparams);
@@ -111,8 +111,8 @@ WHERE tt.taxonomy IN ('category') AND tr.object_id = (".$row['ID'].");";
                     $post->setTotaltime($postmeta['meta_value']);
                 }/*elseif ($postmeta['meta_key'] == "_bsf_recipes_photo" && $post->getImage() == "") {
                     $image = $postmeta['meta_value'];
-                    $imagename = str_replace('http://cuisinezavecdjouza.fr/wp-content/','',$image);
-                    $imagename = str_replace('https://cuisinezavecdjouza.fr/wp-content/','',$imagename);
+                    $imagename = str_replace('http://cuisinezavecdjizou.fr/wp-content/','',$image);
+                    $imagename = str_replace('https://cuisinezavecdjizou.fr/wp-content/','',$imagename);
                     $folders = explode("/",$imagename);
                     unset($folders[count($folders)-1]);
                     $fold = $container->get('kernel')->getRootDir() . '/../web/'.implode('/',$folders);
@@ -147,7 +147,7 @@ WHERE tt.taxonomy IN ('category') AND tr.object_id = (".$row['ID'].");";
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
         $con = $em->getConnection();
-        $sql = "select * from djouza.wp_redirection_items where url like '%$slug%' and status = 'enabled'  order by id desc limit 1";
+        $sql = "select * from djizou.wp_redirection_items where url like '%$slug%' and status = 'enabled'  order by id desc limit 1";
         $stmtoptions = $con->prepare($sql);
         $stmtoptions->execute();
         $redirect = $stmtoptions->fetch();
@@ -173,17 +173,17 @@ WHERE tt.taxonomy IN ('category') AND tr.object_id = (".$row['ID'].");";
         return $formated;
     }
     private function updateUrls($str){
-        $str = str_replace('http://cuisinezavecdjouza.fr/', '', $str);
+        $str = str_replace('http://cuisinezavecdjizou.fr/', '', $str);
         $str = str_replace('[caption', '<caption', $str);
         $str = str_replace('[/caption]', '</caption>', $str);
         $str = str_replace(']', '>', $str);
-        $str = str_replace('https://cuisinezavecdjouza.fr/', '', $str);
-        $str = str_replace('http://www.cuisinezavecdjouza.fr/', '', $str);
-        $str = str_replace('https://www.cuisinezavecdjouza.fr/', '', $str);
-        $str = str_replace('http://cuisinezavecdjouza.fr', '', $str);
-        $str = str_replace('https://cuisinezavecdjouza.fr', '', $str);
-        $str = str_replace('http://www.cuisinezavecdjouza.fr', '', $str);
-        $str = str_replace('https://www.cuisinezavecdjouza.fr', '', $str);
+        $str = str_replace('https://cuisinezavecdjizou.fr/', '', $str);
+        $str = str_replace('http://www.cuisinezavecdjizou.fr/', '', $str);
+        $str = str_replace('https://www.cuisinezavecdjizou.fr/', '', $str);
+        $str = str_replace('http://cuisinezavecdjizou.fr', '', $str);
+        $str = str_replace('https://cuisinezavecdjizou.fr', '', $str);
+        $str = str_replace('http://www.cuisinezavecdjizou.fr', '', $str);
+        $str = str_replace('https://www.cuisinezavecdjizou.fr', '', $str);
         return $str;
     }
 }
